@@ -23,8 +23,11 @@ bookkeeping, not diligence.
 
 One persistent file per system under review — default `BEGEHUNG-MAP.md`
 at the system's root; a repo's own conventions may name another home
-(search for an existing map before creating one). The MAP is the
-deliverable; round reports derive from it. One row per axis:
+(search for an existing map before creating one). A walker without a
+write path into the system (a dispatched reviewer, a parallel-owned
+copy) builds the MAP as a review copy in its own scratch and says so —
+the persistent home stays the system's, landed by its owner. The MAP is
+the deliverable; round reports derive from it. One row per axis:
 
 | axis (what against what) | status | last visited (date · round) | yield | next step |
 
@@ -72,7 +75,10 @@ skill replaces.
    round report is not a carrier): a mechanism at the emission point,
    asking first whether a mandatory field there would make the
    failure computable — or an explicit prose-rest label naming the
-   backstop. No third state.
+   backstop. No third state. A walker without a write path into the
+   carriers hands each disposition as a ready-to-land block with its
+   landing trigger named — the booking duty transfers to the owner,
+   it does not lapse.
 5. **Rounds end; the walk does not.** Falling yield inside the lens
    ends the lens, never the review. Close by updating the row
    (status, date, yield) and reporting coverage counts — k guarded /

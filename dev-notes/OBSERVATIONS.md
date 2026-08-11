@@ -82,6 +82,31 @@ in Composition; placement scan: grep -i "across|recur|class" →
 sole prior hit line 44, derivation dimensions), abstraction ✓
 (system-neutral wording).
 
+## 2026-08-11 — trial run 2: three-arm Tier-2 on opus (fresh consumers), graded
+
+Full record: eval-begehung/2026-08-11/result.md + the four transcript
+files there. Answers both booked questions: OPUS FITNESS — the fresh
+opus consumer executed all five forcing points from the skill text
+alone (MAP with 13 surfaces/12 rows before search, registered lens,
+coverage denominators, disposition taxonomy with an honest
+write-boundary deviation, MAP-anchored rotation on follow-up) — the
+declared consumer range holds at the opus tier. NO-OP QUESTION,
+uncontaminated: the bookkeeping layer is skill-exclusive (absent in
+both corpus-loaded controls, including the sentence/ablation arm),
+while finding quality and structural pattern reads are corpus-wide.
+The skill's priced value at n=1 is the artifacts, not the findings.
+
+FP5 cross-row clause — firing log, first fresh-consumer read: FIRED
+(tier2-with.md B8 "Every finding above is an instance of this
+structure … one cure outranks the per-row patches", anchored in row
+A12; escalated to B9 on follow-up). AMBIGUITY, recorded rather than
+smoothed: both control arms produced sibling structural diagnoses
+without the clause (repair-carry-across; three exposure classes), so
+the clause's exclusive contribution over the opus+corpus default is
+unresolved at n=1 — what is clause-exclusive so far is the MAP-row
+ANCHORING of the diagnosis. Keep logging per round; cut-candidate
+rules apply if later rounds show the read is default.
+
 ## 2026-08-11 — birth review (skill-craft review-checklist pass, condensed)
 
 Clean on consumer/structure/boundary/pointer/ladder/register/
@@ -93,3 +118,20 @@ enforced at the weakest ladder rung (fail-loud downstream: a round
 without a registration line is visible in the MAP diff); a structural
 gate stays fire-born-pending per CLAUDE.md — book the incident here
 if a trial run skips registration under momentum.
+
+## 2026-08-11 — mint: the read-only walker exit (MAP + FP4), second fire
+
+Provenance, both fires same day: trial 1 (pbs-office — parallel
+session owned the working copies; dispositions exited as ready-to-land
+blocks) and trial 2's WITH arm (read-only brief on statiker — "All
+eight want BACKLOG.md entries; I own no write path, so none are
+booked — a gap I hand you"). The fire-born-pending note from trial 1
+is hereby minted: mint condition was the second occurrence. Note the
+edit's direction: both walkers behaved CORRECTLY by default — the
+amendment corrects the RULE TEXT, whose literal "booked in the
+system's own carriers … no third state" forbade the correct behavior
+for the entire read-only consumer class (dispatched reviewers).
+Placement scan: grep -i "read-only|ownership|write path|carrier|
+scratch" → sole hit FP4:71-72 (gap). Two one-meaning edits: MAP
+section (review-copy clause), FP4 (ready-to-land exit, duty
+transfers). Version 0.1.2.
