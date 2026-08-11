@@ -1,0 +1,15 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "begehung",
+  "description": "Systematic robustness/coverage review via a persistent axis map — lens rotation instead of incident-chasing",
+  "owner": {
+    "name": "Gunther Schulz"
+  },
+  "plugins": [
+    {
+      "name": "begehung",
+      "description": "The systematic inspection walk for system reviews: a persistent axis MAP per system, lens pre-registered per round, per-lens yield stop, darkest-corner rotation, findings exiting as emission-point mechanisms or labeled prose-rest — no global done-claim.",
+      "source": "./plugin"
+    }
+  ]
+}
