@@ -20,12 +20,6 @@ fire-born per CLAUDE.md.
   routing output against PLAN.md's expected routing. Done: results
   recorded in dev-notes; description sharpened if any negative
   routes here or any positive misses.
-- **READY 2026-08-11 — first trial run (probe-then-certify).**
-  Design (decided): run a real Begehung on a real system — named
-  candidate: pbs-office, next lens per its Achsen-Inventur (Achse 7
-  Zahlen-Quercheck, FB 3.60). Verifier: the run graded against
-  PLAN.md's Tier-2 behaviour-delta signature, point by point. Done:
-  graded run recorded in dev-notes/OBSERVATIONS.md.
 - **PARKED 2026-08-11 — statiker-framework absorption.** Trigger:
   the statiker-framework exists and begehung has ≥1 certified trial
   run. Until then begehung stays a standalone thin skill (PLAN.md,
@@ -36,4 +30,9 @@ fire-born per CLAUDE.md.
 
 ## Done
 
-(move here with the commit pointer)
+- **first trial run (probe-then-certify)** — run 2026-08-11 on
+  pbs-office (Achse 7 Zahlen-Quercheck), graded 5/5 against the
+  Tier-2 signature with one recorded deviation (parallel-ownership
+  case, no rule minted — fire-born pending a second occurrence);
+  record in dev-notes/OBSERVATIONS.md "trial run 1". Commit: this
+  one.

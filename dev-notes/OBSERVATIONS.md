@@ -21,6 +21,47 @@ PROCESS itself. Full record: pbs-office
 Every clause of SKILL.md v0.1.0 traces to this incident; no clause is
 speculative except where PLAN.md marks it (name cold-probe pending).
 
+## 2026-08-11 — trial run 1 (pbs-office, Achse 7 Zahlen-Quercheck), graded
+
+First real run, same day as birth, invoked through the installed
+plugin (cache 0.1.0 — the serve path itself verified). Lens
+operator-named per the BACKLOG trial spec; it coincided with the
+darkest buildable row. Read-only run: a parallel session owned the
+target repos, so carrier booking left the round as ready-to-land
+blocks (scratchpad report `begehung-runde1-bericht.md`, relayed to
+the operator) with the landing trigger named.
+
+Tier-2 signature, point by point (PLAN.md):
+1. MAP before search — PASS, with the search-first clause FIRING
+   usefully: pbs-office already had a MAP under its own convention
+   (the Achsen-Inventur: dated statuses, staleness rule, declared
+   review consumer). No parallel BEGEHUNG-MAP.md was created; the
+   clause prevented a two-homes split. First-run surface enumeration
+   still ran and yielded three missing rows (chat answers, status
+   labels, the instruments themselves) — structure-derivation adds
+   value even over an existing map.
+2. Lens pre-registered before first search — PASS (registration file
+   written before the first probe command).
+3. Coverage counts, no done-claim — PASS (5 mechanical / 6 prose /
+   2 dark of 13 rows, with the honest caveat that unvisited rows
+   carry inventory-label status only).
+4. Structural disposition per finding — PASS with one DEVIATION: the
+   skill says "booked in the system's own carriers", but the system's
+   working copies were owned by another writer (one-writer rule).
+   Round exited via ready-to-land blocks + named landing trigger.
+   Gap candidate (fire-born, first occurrence — no rule yet): the
+   skill has no clause for the parallel-ownership case.
+5. "Is there more?" answered by rotation — PASS (next: row 13
+   instruments-axis, dark + fresh incident, or row 8 geometry).
+
+Yield: 5 findings, each with executed basis — including the meta-find
+that the MAP's own axis-7 label ("NICHTS mechanisch") was imprecise
+against the implementation body (a partial mechanical floor exists),
+which grounds a future round on label-vs-body OF THE MAP ITSELF.
+The round also produced exactly the missing evidence a parked build
+entry had named (FB 3.60 false-fire measurement) — the walk feeds
+the build queue, as designed.
+
 ## 2026-08-11 — birth review (skill-craft review-checklist pass, condensed)
 
 Clean on consumer/structure/boundary/pointer/ladder/register/
