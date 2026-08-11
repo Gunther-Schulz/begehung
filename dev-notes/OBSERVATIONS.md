@@ -135,3 +135,24 @@ Placement scan: grep -i "read-only|ownership|write path|carrier|
 scratch" → sole hit FP4:71-72 (gap). Two one-meaning edits: MAP
 section (review-copy clause), FP4 (ready-to-land exit, duty
 transfers). Version 0.1.2.
+
+## 2026-08-11 — two-arm Tier-2 on OPUS arms, graded (BACKLOG READY entry executed)
+
+Full record: dev-notes/eval-begehung/2026-08-11-opus/ (both arm
+files verbatim + result.md with per-element citations). Verdict:
+signature present-with / absent-without on elements 1, 2, 3, 5;
+element 4 present vs partial. Both arms led with the identical
+blocking finding (statiker contract battery red at HEAD,
+dispatcher-verified); deep sets disjoint. The skill's measured
+delta on a top-tier arm is structure-and-carry (MAP, coverage
+counts with named darkness, landing-trigger dispositions,
+rotation state), not finding quality — consistent with the
+three-arm sonnet result and now shown at the consumer range's
+top. Opus fitness: yes. FP5 cross-row clause: binds (the WITH arm
+produced the cross-row class read feeding rotation; the control
+did not). Instrument notes: served version lagged the pin
+(0.1.1/0.1.2) and the arm self-corrected by reading the delta —
+grade unaffected; the dispatcher's "your OWN scratchpad" brief
+wording was false for parallel arms (shared session scratchpad,
+one MAP collision with a stale claim) — existing dispatch-skill
+rule, dispatcher miss, logged not minted.

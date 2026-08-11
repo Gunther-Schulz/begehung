@@ -10,23 +10,16 @@ fire-born per CLAUDE.md.
   the statiker-framework exists and begehung has ≥1 certified trial
   run. Until then begehung stays a standalone thin skill (PLAN.md,
   Mission).
-- **READY 2026-08-11 — two-arm Tier-2 on OPUS arms.** Design
-  (decided): one representative review task on a neutral small
-  system (named candidate: the statiker repo — real emission
-  surfaces, read-only arms suffice), two parallel OPUS subagents:
-  WITH arm invokes begehung:begehung, WITHOUT arm barred from
-  methodology skills; outputs saved as
-  dev-notes/eval-begehung/<date>/tier2-{with,without}.md. One
-  priced run answers two open questions: opus fitness for the
-  declared consumer range, and the fresh-consumer read of the FP5
-  cross-row clause (the no-op question, uncontaminated). Verifier:
-  eval-skill step 4e — per-element citations into both files
-  against PLAN.md's Tier-2 signature, plus the contamination grep
-  for coined terms in the WITHOUT arm. Done: both arm files +
-  verdict in result.md; an absent-with or present-without
-  signature books an observation.
-
 ## Done
+
+- **two-arm Tier-2 on OPUS arms** — run 2026-08-11, 2 × opus
+  (with/without), statiker repo as the review object. Verdict:
+  signature present-with/absent-without (4 of 5 elements; the
+  fifth present vs partial); opus fitness confirmed; FP5
+  cross-row clause binds uncontaminated. Record:
+  dev-notes/eval-begehung/2026-08-11-opus/ (arm files verbatim +
+  result.md); observation in dev-notes/OBSERVATIONS.md same date.
+
 
 - **repo visibility** — operator word 2026-08-11: public (statiker
   precedent). Executed same day: `gh repo edit --visibility public`,
