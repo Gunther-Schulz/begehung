@@ -10,12 +10,27 @@ fire-born per CLAUDE.md.
   the statiker-framework exists and begehung has ≥1 certified trial
   run. Until then begehung stays a standalone thin skill (PLAN.md,
   Mission).
-- **PARKED 2026-08-11 — repo visibility.** Born private; public
-  (statiker precedent) is the operator's call. Trigger: operator
-  word.
+- **READY 2026-08-11 — two-arm Tier-2 on OPUS arms.** Design
+  (decided): one representative review task on a neutral small
+  system (named candidate: the statiker repo — real emission
+  surfaces, read-only arms suffice), two parallel OPUS subagents:
+  WITH arm invokes begehung:begehung, WITHOUT arm barred from
+  methodology skills; outputs saved as
+  dev-notes/eval-begehung/<date>/tier2-{with,without}.md. One
+  priced run answers two open questions: opus fitness for the
+  declared consumer range, and the fresh-consumer read of the FP5
+  cross-row clause (the no-op question, uncontaminated). Verifier:
+  eval-skill step 4e — per-element citations into both files
+  against PLAN.md's Tier-2 signature, plus the contamination grep
+  for coined terms in the WITHOUT arm. Done: both arm files +
+  verdict in result.md; an absent-with or present-without
+  signature books an observation.
 
 ## Done
 
+- **repo visibility** — operator word 2026-08-11: public (statiker
+  precedent). Executed same day: `gh repo edit --visibility public`,
+  verified PUBLIC. Commit: this one.
 - **name cold-probe** — run 2026-08-11, fresh sonnet context, word
   only: RECRUITS strongly (coverage-over-depth-first, whole-object
   scope, cadence, per-stop protocol — all unprompted). KEEP the
