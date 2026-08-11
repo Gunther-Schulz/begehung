@@ -6,20 +6,6 @@ fire-born per CLAUDE.md.
 
 ## Open
 
-- **READY 2026-08-11 — name cold-probe.** Design (decided): ask a
-  fresh context with no skill text loaded what behavior "Begehung"
-  (as a review-process name) implies; the term recruits if the answer
-  reproduces the systematic whole-object walk-with-protocol
-  (skill-craft term-selection verification; renaming is cheap only
-  while the repo is young). Verifier: the probe transcript itself,
-  graded against that recruitment criterion. Done: transcript in
-  dev-notes, keep-or-rename decided and recorded.
-- **READY 2026-08-11 — Tier-1 triggering eval.** Design (decided):
-  run PLAN.md's positive/negative query set via `/eval-skill`
-  (skill-craft:skill-router). Verifier: the runner's per-query
-  routing output against PLAN.md's expected routing. Done: results
-  recorded in dev-notes; description sharpened if any negative
-  routes here or any positive misses.
 - **PARKED 2026-08-11 — statiker-framework absorption.** Trigger:
   the statiker-framework exists and begehung has ≥1 certified trial
   run. Until then begehung stays a standalone thin skill (PLAN.md,
@@ -30,6 +16,17 @@ fire-born per CLAUDE.md.
 
 ## Done
 
+- **name cold-probe** — run 2026-08-11, fresh sonnet context, word
+  only: RECRUITS strongly (coverage-over-depth-first, whole-object
+  scope, cadence, per-stop protocol — all unprompted). KEEP the
+  name. Transcript + grade:
+  dev-notes/eval-begehung/2026-08-11/cold-probe-transcript.md.
+  Commit: this one.
+- **Tier-1 triggering eval** — run 2026-08-11 via /eval-skill, 3×
+  skill-router against 6 competitors: 12/12 clean (7 positives fire
+  3/3 incl. the no-keyword boundary query; 5 negatives zero fires,
+  each at its right owner). No description change. Record:
+  dev-notes/eval-begehung/2026-08-11/result.md. Commit: this one.
 - **round-close cross-row class read** — parked 132086e, minted same
   day into forcing point 5 (this commit) on operator GO. The parking
   basis did not survive one question: the "fails the no-op test"
