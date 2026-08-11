@@ -62,6 +62,26 @@ The round also produced exactly the missing evidence a parked build
 entry had named (FB 3.60 false-fire measurement) — the walk feeds
 the build queue, as designed.
 
+## 2026-08-11 — mint: cross-row class read (forcing point 5)
+
+Provenance: founding day — one failure class (label-over-body) fired
+across ≥4 emission surfaces and the cure was one emission-point
+convention, not per-surface patches. Minted on operator GO after an
+operator question exposed the parking rationale's flaw: the no-op
+verdict ("trial run 1 did it unprompted") was measured in the session
+that had just discovered the class — hot-context evidence cannot
+grade a consumer default. Lesson for future no-op verdicts on this
+corpus: grade against a FRESH consumer, never the authoring session.
+Clause status: evidence register, no-op-validated-by-use — a firing
+log line lands here each time a round's cross-row read finds a
+recurrence the per-row pass missed; no firings by the next
+consolidation makes it a cut candidate. Condensed review pass on the
+diff: register ✓ (evidence), placement ✓ (FP5, the closing seam it
+governs, own sentence), duplication ✓ (statiker routing stays solely
+in Composition; placement scan: grep -i "across|recur|class" →
+sole prior hit line 44, derivation dimensions), abstraction ✓
+(system-neutral wording).
+
 ## 2026-08-11 — birth review (skill-craft review-checklist pass, condensed)
 
 Clean on consumer/structure/boundary/pointer/ladder/register/

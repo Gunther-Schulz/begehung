@@ -77,7 +77,10 @@ skill replaces.
    ends the lens, never the review. Close by updating the row
    (status, date, yield) and reporting coverage counts — k guarded /
    m prose / j dark of n rows — in place of any global "done" or
-   "secured" claim. A row unvisited longer than the MAP's declared
+   "secured" claim. Closing also reads once ACROSS rows: a failure
+   class recurring in several rows is itself a finding — the
+   structure minting that class, where one structural cure outranks
+   n per-row patches. A row unvisited longer than the MAP's declared
    interval is itself a finding at the next invocation.
 
 ## Rotation

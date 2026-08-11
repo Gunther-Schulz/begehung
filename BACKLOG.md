@@ -20,20 +20,6 @@ fire-born per CLAUDE.md.
   routing output against PLAN.md's expected routing. Done: results
   recorded in dev-notes; description sharpened if any negative
   routes here or any positive misses.
-- **PARKED 2026-08-11 — round-close cross-row class read (the
-  anti-whack-a-mole clause).** Candidate: forcing point 5 gains one
-  evidence-register sentence — closing a round includes reading the
-  MAP ACROSS rows for a failure class recurring in several; a
-  recurring class indicts the structure that mints it (one structural
-  cure over n patches), and that finding routes to statiker.
-  Evidence FOR the behavior: founding day 2026-08-11, label-over-body
-  fired across ≥4 surfaces and the cure was one emission-point
-  convention, not four patches. Evidence AGAINST minting now: trial
-  run 1 drew the cross-row connection unprompted (report B1) — the
-  clause fails the no-op test for the declared consumer on current
-  evidence. Trigger to mint: a graded round that MISSES a cross-row
-  recurrence a later lens finds — the no-op assumption refuted by a
-  real fire.
 - **PARKED 2026-08-11 — statiker-framework absorption.** Trigger:
   the statiker-framework exists and begehung has ≥1 certified trial
   run. Until then begehung stays a standalone thin skill (PLAN.md,
@@ -44,6 +30,15 @@ fire-born per CLAUDE.md.
 
 ## Done
 
+- **round-close cross-row class read** — parked 132086e, minted same
+  day into forcing point 5 (this commit) on operator GO. The parking
+  basis did not survive one question: the "fails the no-op test"
+  verdict rested on trial run 1's unprompted cross-row read, but that
+  run executed in the session that had just discovered the class —
+  contaminated evidence, undecidable from there. Provenance (founding
+  day, label-over-body across ≥4 surfaces, one structural cure)
+  satisfies fire-born; no-op status now validated by use — cut
+  candidate if fresh-session rounds show the read is default.
 - **first trial run (probe-then-certify)** — run 2026-08-11 on
   pbs-office (Achse 7 Zahlen-Quercheck), graded 5/5 against the
   Tier-2 signature with one recorded deviation (parallel-ownership
