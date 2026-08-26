@@ -182,7 +182,14 @@ SKILL.md, offered under skill-craft's reflexivity rule.
    files pass the harness's report-file block — and the MAP row is
    generated from it; the dispatcher books each row through the
    carrier's intake. Message = pointer + counts.
-2. **Freshness token at report time.** Round 3 read at `52918a9` and
+2. **Freshness token at report time.** ANGEWANDT aa5459b (v0.2.1) —
+   design reversed mid-amendment on judgment-desk ruling: supersession
+   rides the EXISTING prose-rest vocabulary with a `superseded-by
+   <change-ref>:` head on `basis`, not a third disposition value,
+   whose reach into the quoted founding core and three published
+   descriptions was out of proportion to the finding. The re-test's
+   `reach` (r hold, s superseded) is the un-fakeable half, not the
+   version tokens. Round 3 read at `52918a9` and
    round 4 at `55fe90b`; the artifact moved under both (lanes.json
    negation, the plugin declaration), and two blocking findings
    arrived already fixed. Fix text: before the final part the walker
