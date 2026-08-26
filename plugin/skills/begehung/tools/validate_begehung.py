@@ -26,7 +26,7 @@ tool cannot make rather than something it could not read.
 Reach, stated: this checks STRUCTURE — column orders, vocabulary
 membership, presence of required rows and marks. It does not judge
 whether a finding is well-reasoned or a MAP row's status is honest;
-only a human reading the content does that.
+only the walker reading the content does that.
 """
 import argparse
 import json
@@ -214,6 +214,26 @@ def leading_token(cell: str):
     return m.group(1), m.group(2).strip()
 
 
+def schema_row_token(map_section: dict, row_key: str):
+    """The token an owed MAP row is RECOGNIZED by, from schema.json's
+    map.required_rows.<row_key>.match. Returns None when the schema
+    declares no usable token, so the caller degrades to UNVERIFIED
+    rather than falling back to a spelling of its own.
+
+    Recognizing a row by token is a real limitation, not an oversight:
+    a faithfully-built row worded differently — another language, a
+    house phrasing — is invisible to it, and a decoy row merely
+    containing the token passes. Keeping the token in the schema is
+    what makes that limitation a ONE-LINE repair for the system being
+    walked, instead of a checker defect nobody can fix from outside.
+    """
+    entry = ((map_section.get("required_rows") or {}).get(row_key) or {})
+    if not isinstance(entry, dict):
+        return None
+    token = entry.get("match")
+    return token if isinstance(token, str) and token.strip() else None
+
+
 def schema_role_value(section: dict, vocab_list, role_key: str):
     """The member of an UNORDERED schema vocabulary that a check must
     single out by MEANING — "the status meaning absence", "the
@@ -261,12 +281,26 @@ def run_findings(path: Path, schema: dict, grades_override) -> int:
     findings_schema = schema.get("findings", {})
     schema_cols = findings_schema.get("columns", [])
     vocab = findings_schema.get("vocabularies", {})
-    grade_vocab = grades_override if grades_override is not None else vocab.get("grade", [])
+    # N8: these two schema keys are READ, not assumed. An inert key inside
+    # the file declared "the single home" reads as authority it does not have.
+    overridable = vocab.get("grade_overridable", True)
+    refused_override = grades_override is not None and not overridable
+    if refused_override:
+        status_line(
+            "FAIL",
+            "check 5: --grades was given, but schema.json sets "
+            "findings.vocabularies.grade_overridable false — the schema "
+            "forbids a per-run grade vocabulary here",
+        )
+        grade_vocab = vocab.get("grade", [])
+        grades_override = None
+    else:
+        grade_vocab = grades_override if grades_override is not None else vocab.get("grade", [])
     disposition_vocab = vocab.get("disposition", [])
     basis_labels = vocab.get("basis_labels", [])
     marks = findings_schema.get("marks", {})
-    ready_mark = marks.get("ready_to_land", "ready-to-land")
-    superseded_mark = marks.get("superseded", "superseded-by")
+    ready_mark = marks.get("ready_to_land")
+    superseded_mark = marks.get("superseded")
 
     raw = read_raw(path)
     rows, newline_hits = parse_tsv(raw)
@@ -276,17 +310,27 @@ def run_findings(path: Path, schema: dict, grades_override) -> int:
     header = rows[0]
     data_rows = rows[1:]
 
-    failed = False
+    failed = refused_override
 
     # Check 1: header
     n = len(schema_cols)
     if len(header) >= n and header[:n] == schema_cols:
         extra = header[n:]
-        status_line("OK", f"check 1: header matches schema columns ({n} columns)")
-        if extra:
-            detail(f"{len(extra)} extra trailing column(s): {extra}")
+        minimum = schema.get("findings", {}).get("columns_are_minimum", True)
+        if extra and not minimum:
+            failed = True
+            status_line(
+                "FAIL",
+                f"check 1: {len(extra)} extra trailing column(s) {extra}, and "
+                "schema.json sets findings.columns_are_minimum false",
+            )
         else:
-            detail("no extra columns")
+            status_line("OK", f"check 1: header matches schema columns ({n} columns)")
+            if extra:
+                detail(f"{len(extra)} extra trailing column(s) — allowed, "
+                       f"schema says the column list is a minimum: {extra}")
+            else:
+                detail("no extra columns")
     else:
         failed = True
         status_line("FAIL", "check 1: header does not equal schema findings.columns")
@@ -355,9 +399,16 @@ def run_findings(path: Path, schema: dict, grades_override) -> int:
     else:
         idx = col_index["disposition"]
         bad = []
+        if ready_mark is None:
+            status_line(
+                "UNVERIFIED",
+                "check 6: disposition — schema.json declares no "
+                "findings.marks.ready_to_land, so a marked cell cannot be "
+                "stripped and its value cannot be graded",
+            )
         for i, r in enumerate(data_rows):
             cell = r[idx] if idx < len(r) else ""
-            has_mark, remainder = strip_ready_to_land(cell, ready_mark)
+            has_mark, remainder = strip_ready_to_land(cell, ready_mark or "\0\0")
             disp_stripped[i] = (has_mark, remainder)
             if not cell.strip() or remainder not in disposition_vocab:
                 bad.append((i, cell, remainder))
@@ -382,9 +433,16 @@ def run_findings(path: Path, schema: dict, grades_override) -> int:
         bad = []
         label_rows = []
         executed_rows = []
+        if superseded_mark is None:
+            status_line(
+                "UNVERIFIED",
+                "check 7: basis — schema.json declares no "
+                "findings.marks.superseded, so a superseded mark cannot be "
+                "recognized and check 8 cannot run faithfully",
+            )
         for i, r in enumerate(data_rows):
             cell = r[idx] if idx < len(r) else ""
-            has_super, ref, remainder = strip_superseded(cell, superseded_mark)
+            has_super, ref, remainder = strip_superseded(cell, superseded_mark or "\0\0")
             basis_info[i] = (has_super, ref, remainder)
             kind = classify_basis_remainder(remainder, basis_labels)
             if not cell.strip() or kind == "empty":
@@ -446,7 +504,7 @@ def run_findings(path: Path, schema: dict, grades_override) -> int:
             status_line("OK", f"check 8: {n_super} superseded-by row(s), all prose-rest/no-mark")
 
     # Check 9: counts — always printed
-    status_line("OK", "check 9: counts (informational, always printed)")
+    status_line("COUNTS", "check 9: counts (informational, never a pass/fail)")
     detail(f"total data rows: {len(data_rows)}")
     if col_index.get("grade") is not None:
         idx = col_index["grade"]
@@ -547,7 +605,7 @@ def run_map(path: Path, schema: dict) -> int:
             if dark is None:
                 status_line(
                     "UNVERIFIED",
-                    "check 4: the absence status carries a label or pointer — "
+                    "check 4: the absence status carries SOMETHING after the token — "
                     "schema.json declares no usable map.roles.absence_status, "
                     "or names one its own map.vocabularies.status no longer "
                     "lists",
@@ -577,16 +635,28 @@ def run_map(path: Path, schema: dict) -> int:
             "in the axis table header",
         )
     else:
-        found = any(
-            "cross-cutting" in (row[axis_idx] if axis_idx < len(row) else "").lower()
-            for row in axis_table["rows"]
-        )
-        if found:
-            status_line("OK", "check 5: cross-cutting row present")
+        token = schema_row_token(map_schema, "cross_cutting")
+        if token is None:
+            status_line(
+                "UNVERIFIED",
+                "check 5: cross-cutting row present — schema.json declares no "
+                "map.required_rows.cross_cutting.match token to recognize it by",
+            )
         else:
-            failed = True
-            status_line("FAIL", "check 5: cross-cutting row present")
-            detail("no axis cell contains 'CROSS-CUTTING' (case-insensitive)")
+            found = any(
+                token.lower() in (row[axis_idx] if axis_idx < len(row) else "").lower()
+                for row in axis_table["rows"]
+            )
+            if found:
+                status_line("OK", f"check 5: an axis row carries the schema's "
+                                  f"cross-cutting token {token!r}")
+            else:
+                failed = True
+                status_line("FAIL", f"check 5: no axis row carries the schema's "
+                                    f"cross-cutting token {token!r}")
+                detail("this recognizes the row by TOKEN, not by meaning: a "
+                       "faithful row worded otherwise fails here, and the cure "
+                       "is schema.json's match token, not a reworded row")
 
     # Check 6: enforcer row — ADVISORY, never fails exit code
     if axis_table is None:
@@ -598,16 +668,25 @@ def run_map(path: Path, schema: dict) -> int:
             "in the axis table header (advisory)",
         )
     else:
-        found = any(
-            "enforcer" in (row[axis_idx] if axis_idx < len(row) else "").lower()
-            for row in axis_table["rows"]
-        )
-        status_line(
-            "ADVISORY",
-            f"check 6: enforcer row {'present' if found else 'absent'} — owed only where "
-            "this system's surfaces emit verdicts about other work, a judgment this "
-            "checker cannot make; never affects exit code",
-        )
+        token = schema_row_token(map_schema, "enforcer")
+        if token is None:
+            status_line(
+                "UNVERIFIED",
+                "check 6: enforcer row — schema.json declares no "
+                "map.required_rows.enforcer.match token to recognize it by",
+            )
+        else:
+            found = any(
+                token.lower() in (row[axis_idx] if axis_idx < len(row) else "").lower()
+                for row in axis_table["rows"]
+            )
+            status_line(
+                "ADVISORY",
+                f"check 6: a row carrying the schema's enforcer token {token!r} is "
+                f"{'present' if found else 'ABSENT'} — whether one is OWED depends on "
+                "this system emitting verdicts about other work, a judgment this "
+                "checker cannot make; never affects exit code",
+            )
 
     # Check 7: at most one empty closed-at, and it is the last round row
     if round_table is None:
@@ -637,6 +716,75 @@ def run_map(path: Path, schema: dict) -> int:
                 detail(f"open row index {empties[0]}, last index is {n_rows - 1}")
             else:
                 status_line("OK", f"check 7: {len(empties)} open round row(s), position valid")
+
+    # Check 8: a CLOSED round row carries a class cell, and a named class
+    # names at least one axis row. PLAN item 10 calls the property compared
+    # over the rows "the half a walker cannot fake"; the row NAMES are
+    # copyable from the table above, so naming one is the part a checker can
+    # verify — that it was compared at all stays the walker's to answer.
+    if round_table is None or axis_table is None:
+        status_line(
+            "UNVERIFIED",
+            "check 8: closed round rows carry a class naming axis rows — "
+            "round and/or axis table not found",
+        )
+    else:
+        closed_idx = schema_column_index(
+            round_table["header"], round_cols, "closed-at")
+        class_idx = schema_column_index(
+            round_table["header"], round_cols, "class")
+        axis_i = schema_column_index(
+            axis_table["header"], axis_cols, axis_cols[0] if axis_cols else "")
+        none_token = schema_role_value(
+            map_schema, map_schema.get("vocabularies", {}).get("class", ["none"]),
+            "empty_class") or "none"
+        if closed_idx is None or class_idx is None or axis_i is None:
+            status_line(
+                "UNVERIFIED",
+                "check 8: closed round rows carry a class naming axis rows — "
+                "schema no longer declares one of closed-at / class / the "
+                "axis-name column",
+            )
+        else:
+            axis_names = [
+                (r[axis_i] if axis_i < len(r) else "").strip().lower()
+                for r in axis_table["rows"]
+            ]
+            empty_class, unnamed = [], []
+            for i, r in enumerate(round_table["rows"]):
+                closed = (r[closed_idx] if closed_idx < len(r) else "").strip()
+                if not closed:
+                    continue  # an open round has not made its cross-row read yet
+                cls = (r[class_idx] if class_idx < len(r) else "").strip()
+                if not cls:
+                    empty_class.append(i)
+                    continue
+                if cls.strip().lower() == none_token.lower():
+                    continue
+                hit = any(
+                    name and any(
+                        w for w in name.split() if len(w) > 3 and w in cls.lower())
+                    for name in axis_names
+                )
+                if not hit:
+                    unnamed.append((i, cls))
+            if empty_class or unnamed:
+                failed = True
+                status_line(
+                    "FAIL",
+                    "check 8: every CLOSED round row carries a class, and a "
+                    f"class other than {none_token!r} names an axis row")
+                for i in empty_class:
+                    detail(f"round row {i}: closed-at filled but class empty "
+                           "— a skipped close")
+                for i, cls in unnamed:
+                    detail(f"round row {i}: class={cls!r} names no axis row "
+                           "from the table above")
+            else:
+                status_line(
+                    "OK",
+                    "check 8: every closed round row carries a class, each "
+                    "naming an axis row or the none-token")
 
     return 1 if failed else 0
 

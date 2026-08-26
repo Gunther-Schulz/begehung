@@ -26,8 +26,8 @@ One persistent file per system under review — default `BEGEHUNG-MAP.md`
 at the system's root; a repo's own conventions may name another home
 (search for an existing map before creating one); the skeleton to copy
 is this skill's `templates/BEGEHUNG-MAP.md`, carrying both tables and
-the two owed rows as rows. A walker without a
-write path into the system (a dispatched reviewer, a parallel-owned
+the two owed rows as rows themselves. A walker without a write path
+into the system (a dispatched reviewer, a parallel-owned
 copy) builds the MAP and the round's findings file as review copies in
 its own scratch, says so, and hands their paths — the persistent home
 stays the system's, landed by its owner. The MAP is the persistent
@@ -89,13 +89,17 @@ First run derives rows from the system's STRUCTURE:
    reads it. Its unit is the artifact rather than the surface, so its
    axis cuts across the others rather than down one.
 
-Completion criterion: `tools/validate_begehung.py map <file>` in this
-skill's directory returns the computable half — both owed rows
-present, every `dark` status labelled, at most one open round row.
-What it cannot read stays judgment: that every enumerated emission
-surface appears in a row, and whether this system emits verdicts about
-other work at all, which is what makes the enforcer row owed. A
-surface without a row is itself a finding; so is a missing owed row.
+Completion criterion: the checker (forcing point 5) reports the
+computable half — the cross-cutting row present, the enforcer row
+present-or-absent for the walker to judge, every `dark` status
+carrying something after the token, at most one open round row. Two
+halves stay judgment: that every enumerated emission surface appears
+in a row, and whether this system emits verdicts about other work at
+all, which is what makes the enforcer row OWED rather than merely
+absent. A surface without a row is itself a finding; so is a missing
+owed row. The checker recognizes the two owed rows by the token
+`templates/schema.json` names for each, so a row worded otherwise is
+reported missing until that token is updated.
 The motivating incident gets one row like any other; a map grown only
 from incidents is the failure mode this skill replaces.
 
@@ -113,8 +117,8 @@ exception, landing at close by construction.
 Tab-separated, one line per row, no tab or newline inside a cell —
 prose wanting either is rewritten to one line; header row and
 vocabularies in this skill's `templates/`, which is what the checker
-reads. `grade` ∈ the system's
-own severity vocabulary where it has one, else **blocking** ·
+reads. `grade` ∈ the system's own severity vocabulary where it has
+one, else **blocking** ·
 **notable** · **nit**. `lens` is the round's registered lens, or `map`
 for a row the MAP's own hygiene produced — a missing row, a stale
 one — and `close` for the cross-row class row. `disposition` ∈ forcing
@@ -128,12 +132,14 @@ in place of it. The schema is a minimum — a round adds what its lens
 needs (a proposed guard's red-first arrangement, forcing point 3,
 needs a column).
 
-Completion criterion: `tools/validate_begehung.py findings <file>`
-returns every cell check and the round's counts by grade and lens —
-run it before reporting counts, so they are read rather than
-remembered. What it cannot see stays judgment: that every finding the
-round reports appears as a row at all. An empty `disposition` at close
-is the round's own open finding. Coverage counts stay the MAP's.
+Completion criterion: the checker (forcing point 5) reports every cell
+check and the round's counts by grade and lens — run it before
+reporting counts, so they are read rather than remembered. What it
+cannot see stays judgment: that every finding the round reports
+appears as a row at all. An empty `disposition` fails the checker at
+close, and that failure IS the round's own open finding: fill the cell
+or record the gap as a finding of this round — the round does not
+close red and silent. Coverage counts stay the MAP's.
 
 ## The round — five forcing points
 
@@ -194,7 +200,12 @@ is the round's own open finding. Coverage counts stay the MAP's.
    the axis row — date, and yield from the findings file (yield
    counts the rows whose `lens` is the registered lens, which
    supersession does not reduce), status from the guard and its
-   red-proof — and report coverage counts — k guarded / m prose / j
+   red-proof. Run the checker over both artifacts before reporting
+   anything — `tools/validate_begehung.py findings <file>` and
+   `tools/validate_begehung.py map <file>`, in this skill's
+   directory: the counts reported are its output, and a round that
+   reports counts it did not read from the file is the hand tally this
+   replaces. Then report coverage counts — k guarded / m prose / j
    dark of n rows — in place of any global "done" or "secured"
    claim. The round's message carries the findings file's path and its
    counts, never the findings themselves: pasted into a message they

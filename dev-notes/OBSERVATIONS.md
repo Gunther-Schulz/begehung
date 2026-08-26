@@ -611,3 +611,56 @@ could-not-verify rather than pass when it could not find the schema —
 had absence been coded as success, a wrong path would have shipped as
 a silent green and the shadowing would never have surfaced. That is
 the absence rule paying for itself inside the session that wrote it.
+
+## 2026-08-26 — the class I fixed in one file and left standing in its sibling
+
+INCIDENT + BASIS. Commit 072aab9 repaired the shipped validator so an
+UNVERIFIED check could no longer exit 0 — "could not verify" in the
+text while the exit code says pass. The SAME change-set edited
+tools/signature_probe.py, which had the identical defect, and left it:
+the probe printed `[ADVISORY] vocab … could not verify, not a pass`
+and returned 0 GREEN, with its tally reading 13 when 12 checks had run
+(measured by the pre-commit self-review, reproduced here without a
+pipe from a directory outside the repo).
+
+Worse than the miss: the OBSERVATIONS entry written in that same
+session CREDITS this very probe with catching a shadowing bug, praising
+the could-not-verify-not-pass discipline — in the file where the
+discipline was absent. The prose about the mechanism was written while
+the mechanism was broken.
+
+CLASS. A defect class repaired at the site where it was NOTICED rather
+than swept across the sites where it can occur. The corpus's
+dependents rule covers renames and value changes; this is its
+behavioural twin — a FIX is a change others depend on too, and the
+sweep that finds the rest keys on the invariant (every instrument that
+can emit could-not-verify) rather than on the file that happened to
+fail. Both instruments here share one author, which is the recorded
+condition for one blind spot repeating across a set.
+
+FIX, APPLIED. signature_probe now counts could-not-verify separately,
+prints AMBER, returns 3, and computes its total from checks actually
+run. Verified: schema absent → exit 3 naming both unverified checks,
+where it previously printed GREEN and exited 0.
+
+SECOND LESSON FROM THE SAME REVIEW, and it is about my own proof. The
+vocabulary drift guard was proven red-first with the planted value
+`deferred` — a distinctive word — and reported as protecting the
+single-home claim. It does not: the match was a substring test over
+the whole file, so a planted value of `row` passed GREEN, and the two
+values it nominally guards most (`map`, `close`) were guarded
+vacuously because SKILL.md uses both words constantly. Red certified
+the CLASS that fired (distinctive tokens) and I read it as the
+instrument's reach. Repaired by requiring the value inside a backtick
+or bold span — the marking SKILL.md already gives every vocabulary
+member — which restores discrimination without a per-value exception
+list. Re-proven: `row` now goes RED.
+
+CONSUMER + DRAIN SEAM. Consumer is any session repairing a defect in
+one of this repo's two instruments; seam is the moment the repair
+lands. The pre-formulated rule: a fix to an instrument's REPORTING
+CONTRACT (exit codes, absence handling, status tokens) is swept across
+every instrument in the repo before the commit closes, and the sweep
+is named in the commit. Not mechanized: the invariant is "things that
+report verdicts", which no grep expresses — the honest form is the
+sweep being a named commit-message slot, with the operator as backstop.

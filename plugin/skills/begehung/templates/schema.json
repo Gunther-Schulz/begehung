@@ -59,8 +59,15 @@
       "absence_status": "dark"
     },
     "required_rows": {
-      "cross_cutting": "lifecycle row — where does it live, who writes it, who reads it",
-      "enforcer": "the enforcer held to its own invariants (owed only where a surface emits verdicts about other work — a judgment the checker cannot make)"
+      "_comment": "`match` is the token a checker looks for in the axis cell to recognize the row. It lives here so a MAP written in another language, or with a house wording, changes ONE line instead of failing a faithful row — and so the checker branches on the schema rather than on its own copy.",
+      "cross_cutting": {
+        "match": "CROSS-CUTTING",
+        "means": "lifecycle row — where does it live, who writes it, who reads it"
+      },
+      "enforcer": {
+        "match": "ENFORCER",
+        "means": "the enforcer held to its own invariants (owed only where a surface emits verdicts about other work — a judgment the checker cannot make)"
+      }
     }
   }
 }

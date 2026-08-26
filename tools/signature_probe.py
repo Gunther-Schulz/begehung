@@ -57,7 +57,16 @@ ANCHORS = [
     ("10", "class cell records the cross-row read: rows spanned AND property",
      ["the round row's `class` records that read",
       "names the rows read across and the property compared over them"]),
+    ("11", "the round RUNS the shipped checker; counts are its output",
+     ["validate_begehung", "run it before reporting counts"]),
 ]
+
+# PLAN.md is the parent: its numbered Tier-2 items are what this set must
+# mirror. A hand-maintained mirror is the restated-set failure one level up
+# — PLAN gains item 11, the anchor set does not, and the probe still claims
+# "every item". So the count is DERIVED from PLAN.md and compared, and the
+# next added item goes red instead of silently unguarded.
+PLAN_REL = "PLAN.md"
 
 
 # (item, why, heading, [phrases]) — the phrase must appear INSIDE that
@@ -87,8 +96,13 @@ SCHEMA_REL = "plugin/skills/begehung/templates/schema.json"
 def vocab_values(schema: dict) -> list:
     """Every closed-vocabulary value the schema declares, flattened."""
     out = []
-    for section in ("findings", "map"):
-        vocabs = schema.get(section, {}).get("vocabularies", {})
+    # Sections derived from the schema's own top-level keys, never a
+    # restated pair: a third section added there would otherwise go
+    # unswept while this check still claimed "every value".
+    for section, body in schema.items():
+        if not isinstance(body, dict):
+            continue
+        vocabs = body.get("vocabularies", {})
         for key, val in vocabs.items():
             if isinstance(val, list):
                 out.extend((key, v) for v in val)
@@ -124,6 +138,7 @@ def main() -> int:
     body = normalize(path.read_text(encoding="utf-8"))
 
     failures = []
+    unverified = []
     for item, why, phrases in ANCHORS:
         missing = [p for p in phrases if normalize(p) not in body]
         status = "MISSING" if missing else "carried"
@@ -156,7 +171,15 @@ def main() -> int:
         import json
         schema = json.loads(schema_path.read_text(encoding="utf-8"))
         pairs = vocab_values(schema)
-        absent = [(k, v) for k, v in pairs if normalize(v) not in body]
+        # N5: a bare substring test is vacuous for short common values —
+        # a planted disposition value "row" passed because SKILL.md says
+        # "row" constantly (measured). SKILL.md marks every vocabulary
+        # member as code or bold, so require THAT span: it restores
+        # discrimination without minting a per-value exception list.
+        absent = [
+            (k, v) for k, v in pairs
+            if not any(normalize(m) in body for m in (f"`{v}`", f"**{v}**"))
+        ]
         status = "MISSING" if absent else "carried"
         print(f"  [{status:>7}] vocab  every schema vocabulary value is "
               f"explained in SKILL.md ({len(pairs)} values)")
@@ -166,15 +189,52 @@ def main() -> int:
         if absent:
             failures.append("vocab")
     else:
-        print(f"  [ADVISORY] vocab  schema not found at {schema_path} — "
+        # Could-not-verify is NOT advisory: an advisory reports a judgment
+        # this probe cannot make, while this reports a check that did not
+        # run. Exiting 0 here is the same defect the shipped validator was
+        # repaired for at 072aab9 — the text saying "not a pass" while the
+        # exit code says pass.
+        print(f"  [UNVERIFIED] vocab  schema not found at {schema_path} — "
               f"could not verify, not a pass")
+        unverified.append("vocab")
 
     total = len(ANCHORS) + len(SECTION_ANCHORS) + 1
+    # Coverage of the parent: does an anchor exist for every Tier-2 item
+    # PLAN.md numbers? Derived from PLAN, never a restated count.
+    plan_path = path.parent.parent.parent.parent / PLAN_REL
+    if not plan_path.exists():
+        plan_path = Path(PLAN_REL)
+    if plan_path.exists():
+        plan_items = set(re.findall(
+            r"^\s*(\d+[ab]?)\.\s", plan_path.read_text(encoding="utf-8"),
+            re.MULTILINE))
+        anchored = {i for i, _, _ in ANCHORS}
+        gap = sorted(plan_items - anchored)
+        if gap:
+            print(f"  [MISSING] cover  every PLAN.md Tier-2 item has an anchor")
+            print(f"              PLAN numbers {gap} with no anchor here")
+            failures.append("cover")
+        else:
+            print(f"  [carried] cover  every PLAN.md Tier-2 item has an anchor "
+                  f"({len(plan_items)} items)")
+    else:
+        print(f"  [UNVERIFIED] cover  PLAN.md not found at {plan_path} — "
+              f"could not verify anchor coverage, not a pass")
+        unverified.append("cover")
+    total += 1
+
+    ran = total - len(unverified)
     print()
     if failures:
         print(f"RED — {len(failures)} of {total} items lost their "
-              f"carrier: {', '.join(failures)}")
+              f"carrier: {', '.join(failures)}"
+              + (f"; {len(unverified)} could not be verified" if unverified else ""))
         return 1
+    if unverified:
+        print(f"AMBER — {ran} of {total} checks ran clean, but "
+              f"{len(unverified)} could NOT be verified "
+              f"({', '.join(unverified)}). This is not a pass: exit 3.")
+        return 3
     print(f"GREEN — all {total} Tier-2 signature items carried in "
           f"{path}")
     return 0

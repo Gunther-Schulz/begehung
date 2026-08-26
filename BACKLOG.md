@@ -6,57 +6,51 @@ fire-born per CLAUDE.md.
 
 ## Open
 
-- **READY 2026-08-26 — precipitate the machine-read semantics into a
-  template + validator.** Provenance: the medium question answered in
-  e97943a — ~46% of SKILL.md is machine-read semantics (two table
-  schemas, three status values, two label vocabularies, two completion
-  criteria) carried in prose, and three review rounds concentrated
-  their findings in exactly that text. DESIGN: the findings-file
-  column semantics, the MAP's two row forms, the status and label
-  vocabularies precipitate into a SHIPPED template (TSV + MAP
-  skeleton) that begehung ships, plus a validator that checks a real
-  findings file against it.
-  WRITE-BOUNDARY QUESTION — ANSWERED 2026-08-26, against the premise
-  booked here. The premise was that the validator's natural home is
-  the lifecycle plugin's intake. REFUTED at the interface: lifecycle's
-  intake is `items add`, one item at a time through named CLI slots
-  (`--requirement`, `--goal`, `--write-set`, `--done-criterion`,
-  `--evidence`), with no file-ingest path — it never reads a findings
-  file and so has nothing to check against begehung's schema (basis:
-  lifecycle/plugin/cli/lifecycle_core/cli.py, the `items add` parser,
-  read 2026-08-26). These are two checks with different questions, not
-  one check in two homes: "is this findings file well-formed?" is
-  begehung's, at round close; "can this become an item?" is
-  lifecycle's, at booking. The validator is begehung's, built in this
-  repo, no cross-repo coordination.
-  DESIGN ADDITION: the validator's invocation anchors at forcing point
-  5's close, where the round's counts are reported — an un-fakeable
-  artifact at a moment that observably produces one, rather than a
-  pointer the walker may not reach.
-  DONE-CRITERION, RESTATED with basis: the original ("word count DOWN
-  from 2087") rests on e97943a's ~46% figure. That figure is right
-  about what the text IS and wrong about what can LEAVE — column lists
-  and vocabularies move, but the semantics of judgment-bearing cells
-  cannot (the `class` cell's "the property is not copyable" is the
-  un-fakeable half a template cannot carry). Realistic movement
-  250-400 words, not 900. Criterion: both completion criteria
-  EXECUTABLE, and every vocabulary with exactly one home — word count
-  down is a side effect, not the target.
-  VERIFIER: the validator goes red on a planted bad cell (an empty
-  disposition, a `dark` row with no label, a `class` cell naming no
-  rows), each red shown beside a green on the same file with only that
-  cell repaired.
-  GATE: process-shape change, so the repo's "Evaluation before text"
-  rule puts a Tier-2 re-run between this and RELEASE (not between it
-  and commit); PLAN's Tier-2 list is amended BEFORE that eval runs,
-  per PLAN's own ordering note.
-  Not started in this arc (judgment-desk ruling 2026-08-26).
+- **READY 2026-08-26 — Tier-2 re-run before the next release.** The
+  precipitate change altered process shape (the round now runs a
+  checker at forcing point 5), so the repo's "Evaluation before text"
+  rule owes a Tier-2 run before release. PLAN's Tier-2 list already
+  carries item 11 for it, amended BEFORE any eval ran per PLAN's own
+  ordering note. DESIGN, decided: one opus arm on an object with an
+  EXISTING map, same brief shape as the 0.3.1 verifier, graded against
+  items 1-11. WRITE-SET: dev-notes/eval-begehung/<date>/ plus the
+  result record. DONE-CRITERION: item 11 graded present/absent with
+  the checker's own output as evidence, and items 1-10 unregressed.
+  VERIFIER: the arm's findings file and MAP review copy, plus its
+  pasted checker run. Not started — release is the operator's act and
+  this gates it.
 
 - **PARKED 2026-08-11 — statiker-framework absorption.** Trigger:
   the statiker-framework exists and begehung has ≥1 certified trial
   run. Until then begehung stays a standalone thin skill (PLAN.md,
   Mission).
+
 ## Done
+
+- **precipitate the machine-read semantics into a template + validator**
+  — built 2026-08-26, commits 92faae9 (schema + templates), 6b535b2 +
+  d4fb620 (the shipped checker, dispatched lane), 072aab9 (role keys,
+  exit contract), and this one (the self-review's 16 findings).
+  DELIVERED against the RESTATED criterion: both completion criteria
+  are executable — `tools/validate_begehung.py findings|map` — and the
+  vocabularies have one home, `templates/schema.json`, which both
+  tools read rather than restate.
+  NOT DELIVERED, and the entry's original criterion was wrong to ask:
+  SKILL.md went UP, 2094 → ~2160 words. What is extractable is the
+  ENUMERATION of legal values; what stays is the SEMANTICS, and prose
+  explaining a vocabulary does not shrink when the vocabulary moves.
+  The ~46% figure from e97943a measured what the text IS, never what
+  can leave (recorded: dev-notes/OBSERVATIONS.md, same date).
+  VERIFIER RUN: the entry named three planted bad cells. Two existed
+  and passed; the third — a `class` cell naming no rows — did NOT
+  exist and was built in this commit, red-first (empty class on a
+  closed round → exit 1; class naming no axis row → exit 1; class
+  naming one → exit 0). Also proven: the German-worded owed row that
+  a hardcoded token failed now passes with one schema line changed.
+  PRE-COMMIT SELF-REVIEW: 4 blocking, 8 notable, 4 nits — all fixed,
+  none deferred, every one reproduced by the dispatcher before repair.
+  SURVIVOR, booked below: the Tier-2 re-run this entry's own GATE line
+  defers to before release.
 
 - **two clause cuts the arc measured but did not take** — built
   2026-08-26, this commit. Cut (a), the FP5 cross-row RATIONALE, taken
