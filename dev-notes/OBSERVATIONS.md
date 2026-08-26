@@ -157,6 +157,59 @@ wording was false for parallel arms (shared session scratchpad,
 one MAP collision with a stale claim) — existing dispatch-skill
 rule, dispatcher miss, logged not minted.
 
+## 2026-08-26 — Tier-2 after the arc: amendment 4 did not fire, and why
+
+Full record: dev-notes/eval-begehung/2026-08-26/ (result.md, both
+arms' artifacts, tier1-result.md). Two opus arms on statiker, same
+object and tier as the 2026-08-11 baseline.
+
+VERDICT, short: signature present-with / absent-without on the
+bookkeeping layer (items 1,2,3,6,7,10), finding quality comparable
+with disjoint deep sets — the August result, replicated against the
+amended skill. Tier-1 12/12 clean; description byte-identical across
+the arc, so it was re-run only for the changed competitor field.
+
+INCIDENT + BASIS: **amendment 4 produced nothing in either arm.** No
+enforcer row, no cross-cutting lifecycle row. The with-arm used the
+target's EXISTING MAP, so first-run derivation steps 4-5 never ran —
+and the completion criterion written for exactly that case ("a
+missing enforcer or cross-cutting row is a finding at every
+invocation, not only the first") did not fire either. statiker
+enforces, so its condition was met.
+
+CLASS: a standing obligation whose WORDS are unconditional but whose
+PLACEMENT is inside a conditional section. Bundle review round 1
+raised this shape (N6); the repair went to the words and left the
+placement. Three review rounds read the clause as correct because it
+IS correct as a sentence — only a live round on a system with an
+existing MAP could show it never reached.
+
+RULE/FIX TEXT, pre-formulated, NOT applied here: move the
+enforcer/cross-cutting row requirement out of the MAP section's
+first-run derivation and into forcing point 1 ("MAP before search"),
+which is the clause a walker executes on EVERY round including one
+that loads an existing MAP. The completion criterion keeps its
+sentence; the trigger moves to a seam that fires unconditionally.
+
+SECOND FINDING, same run: amendment 3's discipline is largely a
+CORPUS DEFAULT. The control arm marked OBSERVED vs DERIVED and ran
+positive and negative controls on its own instruments without the
+skill. Skill-exclusive residue: the label at a FIXED CELL POSITION,
+countable and checkable, versus prose a reader must notice. Real but
+smaller than the clause's text implies — restate at that size, or cut
+to the cell-position claim alone.
+
+THIRD, minor: the with-arm self-reported composing the findings file
+at close rather than appending as findings landed — the
+append-as-you-go rule failing its first live outing, which defeats its
+stated purpose (an interrupted round still leaves its artifact).
+
+CONSUMER + DRAIN SEAM: the next begehung maintenance pass. Not
+patched in this arc — a fourth repair lap on the same clause without
+new evidence is the shape the repair-lap rule warns about, and this
+eval is the first evidence that reached the artifact rather than the
+text.
+
 ## 2026-08-26 — instrument lesson: a reformatter is not a formatting step
 
 INCIDENT + BASIS: mid-bundle, to fix line widths, a python `textwrap`

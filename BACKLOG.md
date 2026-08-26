@@ -6,6 +6,22 @@ fire-born per CLAUDE.md.
 
 ## Open
 
+- **READY 2026-08-26 — move the enforcer/cross-cutting row trigger to
+  forcing point 1.** Provenance: the Tier-2 run of 2026-08-26
+  (dev-notes/eval-begehung/2026-08-26/result.md) — amendment 4
+  produced NO row in either arm, because a walker loading an existing
+  MAP never executes the first-run derivation, and the completion
+  criterion's "at every invocation" sentence sits inside that same
+  conditional section. DESIGN: the requirement moves to forcing point
+  1 ("MAP before search"), which fires on every round including one
+  that loads an existing MAP; the completion criterion keeps its
+  wording. WRITE-SET: plugin/skills/begehung/SKILL.md (FP1 and the MAP
+  completion criterion), PLAN.md items 9a/9b. DONE-CRITERION: a round
+  over a system with an EXISTING map produces or demands both rows.
+  VERIFIER: re-run the Tier-2 with-arm against statiker — which has an
+  existing MAP and enforces — and the enforcer row appears or is
+  reported missing as a finding.
+
 - **READY 2026-08-26 — precipitate the machine-read semantics into a
   template + validator.** Provenance: the medium question answered in
   e97943a — ~46% of SKILL.md is machine-read semantics (two table
