@@ -548,3 +548,66 @@ the amendment-4 record. Seam is the moment a new anchor is added: an
 anchor whose text could be pasted out of SKILL.md is the tell. The
 probe's own docstring carries the short form so the rule sits on that
 reader's actual read path, this file being one they may never open.
+
+## 2026-08-26 — precipitate: what moving machine-read semantics out of prose actually bought
+
+INCIDENT + BASIS. The medium question answered in e97943a graded ~46%
+of SKILL.md machine-read semantics carried in prose, with three review
+rounds concentrating their findings in exactly that text. The
+precipitate entry booked a shipped template plus a validator, its
+done-criterion "SKILL.md word count DOWN from 2087".
+
+MEASURED, and the criterion was wrong. Moving both completion criteria
+into a checker did NOT shrink the prose meaningfully: the replacement
+text must name the checker AND retain the judgment half the checker
+cannot read, which costs about what the original criterion cost. The
+findings criterion shrank (~78 words to ~55); the MAP criterion came
+out roughly neutral. Realistic total movement is well under 100 words,
+against the 250-400 estimated when the write-boundary question was
+answered and the ~900 implied by the original criterion.
+
+CLASS. A size figure measuring what text IS, read as a figure for what
+text can LEAVE. The ~46% was correct as a measurement of character:
+these ARE machine-read semantics. It was never a measurement of
+extractability, because the extractable part is the ENUMERATION (which
+values are legal) while the resident part is the SEMANTICS (what each
+value means, and which halves are judgment) — and prose that explains
+a vocabulary does not shorten when the vocabulary moves. The criterion
+inherited the figure without re-asking what it measured.
+
+FIX, APPLIED at booking time rather than after: the criterion was
+restated BEFORE the build as "both completion criteria EXECUTABLE, and
+every vocabulary with exactly one home", with word count demoted to a
+side effect. That restatement is what made the build honest — under
+the original criterion the same work would have read as a failure, or
+worse, invited cutting load-bearing semantics to hit a number.
+
+WHAT IT DID BUY, stated at its real size: the two completion criteria
+are now RUNNABLE rather than remembered, and the vocabularies have one
+home (templates/schema.json) that the shipped checker reads instead of
+restating. That is the whole gain, and it is a real one — a criterion
+a walker must remember to apply is the class of rule this repo has
+twice found silently unapplied.
+
+A SECOND HOME WAS CREATED, deliberately, and guarded. SKILL.md still
+explains what each value means, so every value now appears in both the
+schema and the prose. Left alone that drifts silently in both
+directions — a value added to the schema leaves the walker filling a
+cell the skill never taught; one added to the prose ships a vocabulary
+the checker rejects. tools/signature_probe.py gained a `vocab` check
+DERIVING the value list from schema.json (never restating it) and
+requiring each value appear in SKILL.md. Red-first: GREEN at baseline
+reading 12 values, RED naming exactly the planted value when a
+thirteenth is added to the schema alone, GREEN on restore.
+
+INSTRUMENT BUG FOUND BY THE INSTRUMENT, worth its own line. The vocab
+check's first run went RED on 11 of 12 values that were plainly
+present. Cause: the section-anchor loop added earlier rebinds the
+variable holding the whole-file text, so the vocabulary search ran
+against the `## Rotation` section alone. Variable shadowing, invisible
+by reading. Two things caught it rather than one: the red itself, and
+the fact that the FIRST version of the path lookup reported ADVISORY /
+could-not-verify rather than pass when it could not find the schema —
+had absence been coded as success, a wrong path would have shipped as
+a silent green and the shadowing would never have surfaced. That is
+the absence rule paying for itself inside the session that wrote it.

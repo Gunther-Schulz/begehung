@@ -24,7 +24,9 @@ bookkeeping, not diligence.
 
 One persistent file per system under review — default `BEGEHUNG-MAP.md`
 at the system's root; a repo's own conventions may name another home
-(search for an existing map before creating one). A walker without a
+(search for an existing map before creating one); the skeleton to copy
+is this skill's `templates/BEGEHUNG-MAP.md`, carrying both tables and
+the two owed rows as rows. A walker without a
 write path into the system (a dispatched reviewer, a parallel-owned
 copy) builds the MAP and the round's findings file as review copies in
 its own scratch, says so, and hands their paths — the persistent home
@@ -87,12 +89,13 @@ First run derives rows from the system's STRUCTURE:
    reads it. Its unit is the artifact rather than the surface, so its
    axis cuts across the others rather than down one.
 
-Completion criterion, checkable and exhaustive: every enumerated
-emission surface appears in at least one row, the cross-cutting row of
-step 5 is present, an enforcer row is present where any step-1 surface
-emits verdicts about other work, and every `dark` row's status cell
-carries `modelled` or an effect-probe pointer. A surface without a row
-is itself a finding; so is a missing enforcer or cross-cutting row.
+Completion criterion: `tools/validate_begehung.py map <file>` in this
+skill's directory returns the computable half — both owed rows
+present, every `dark` status labelled, at most one open round row.
+What it cannot read stays judgment: that every enumerated emission
+surface appears in a row, and whether this system emits verdicts about
+other work at all, which is what makes the enforcer row owed. A
+surface without a row is itself a finding; so is a missing owed row.
 The motivating incident gets one row like any other; a map grown only
 from incidents is the failure mode this skill replaces.
 
@@ -108,7 +111,9 @@ exception, landing at close by construction.
 | lens | grade | artifact line | finding | basis | disposition |
 
 Tab-separated, one line per row, no tab or newline inside a cell —
-prose wanting either is rewritten to one line. `grade` ∈ the system's
+prose wanting either is rewritten to one line; header row and
+vocabularies in this skill's `templates/`, which is what the checker
+reads. `grade` ∈ the system's
 own severity vocabulary where it has one, else **blocking** ·
 **notable** · **nit**. `lens` is the round's registered lens, or `map`
 for a row the MAP's own hygiene produced — a missing row, a stale
@@ -123,14 +128,12 @@ in place of it. The schema is a minimum — a round adds what its lens
 needs (a proposed guard's red-first arrangement, forcing point 3,
 needs a column).
 
-Completion criterion, checkable and exhaustive: every finding the
-round reports appears as a row; every row's `basis` cell carries
-either its executed basis or its label — at the head, or immediately
-behind a `superseded-by` mark; every row's `disposition` cell carries
-its exit at round close, an empty cell being the round's own open
-finding; and the finding counts the round reports — total, per grade,
-per lens — are read from the file.
-Coverage counts stay the MAP's.
+Completion criterion: `tools/validate_begehung.py findings <file>`
+returns every cell check and the round's counts by grade and lens —
+run it before reporting counts, so they are read rather than
+remembered. What it cannot see stays judgment: that every finding the
+round reports appears as a row at all. An empty `disposition` at close
+is the round's own open finding. Coverage counts stay the MAP's.
 
 ## The round — five forcing points
 
@@ -212,7 +215,9 @@ registration, and as a new axis row where none fits.
 - A loaded operator corpus's evidence rules govern all findings; this
   skill cites them, restating only what its own completion criteria
   and schema requirements read — neither can check a rule its reader
-  may not have loaded.
+  may not have loaded. The checker reads less still: it grades cells
+  against `templates/schema.json`, never the judgment behind them, so
+  its green is "well-formed", never "well-reviewed".
 - A finding that opens design work routes to statiker (the design
   loop); a delegated sweep uses the dispatch skill's brief forms —
   the brief carries the registered lens and names where the findings

@@ -160,6 +160,22 @@ as evidence either way.
    is not, so the property is the half a walker cannot fake; the read
    runs BEFORE the round's counts, since a named class takes a
    findings row those counts include.
+11. The round RUNS the shipped checker
+   (`tools/validate_begehung.py`, in the skill's own directory) over
+   its findings file and its MAP, and the counts it reports are that
+   checker's output rather than a hand tally. Added 2026-08-26 with
+   the precipitate change, BEFORE the eval that grades it, per the
+   ordering note above. DISCRIMINATOR: the checker's OUTPUT appears —
+   an arm that hand-counts rows correctly MISSES this item, because
+   the delta is the counts being read rather than remembered, not the
+   counts being right. A control arm cannot satisfy it at all: the
+   checker ships with the skill. CARVE-OUT, so a correct arm is not
+   graded a miss: a walker without a write path into the system still
+   runs the checker over its own review copies, but an arm whose
+   environment cannot execute the script (no python3, checker absent
+   from an older served version) grades COULD-NOT-VERIFY on this item,
+   never a miss — and the arm's report is what says which, so an arm
+   silent about the checker is a miss rather than a could-not-verify.
 
 ## Trial method (statiker pattern: probe-then-certify)
 

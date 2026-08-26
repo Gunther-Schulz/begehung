@@ -15,16 +15,18 @@ THIS FILE, never the current working directory.
 
 Absence rule: whatever this validator cannot read — a missing column,
 a table it cannot find, a cell it cannot classify — is reported as
-UNVERIFIED, never as a pass. A file that does not exist or does not
-parse exits 2, distinct from a validation failure (exit 1).
+UNVERIFIED, never as a pass. That holds at the EXIT CODE too, which is
+the only layer a script reads: any UNVERIFIED check exits 3 (AMBER)
+even when nothing failed, because "could not verify" is not "clean".
+Exit 0 clean · 1 a check failed · 2 a named input is missing or does
+not parse · 3 nothing failed but something could not be verified.
+ADVISORY results never move the exit code: they report a judgment this
+tool cannot make rather than something it could not read.
 
 Reach, stated: this checks STRUCTURE — column orders, vocabulary
 membership, presence of required rows and marks. It does not judge
 whether a finding is well-reasoned or a MAP row's status is honest;
 only a human reading the content does that.
-
-Exit 0 = every non-advisory check passed. Exit 1 = at least one
-check failed. Exit 2 = a named input could not be read or parsed.
 """
 import argparse
 import json
@@ -35,7 +37,22 @@ from pathlib import Path
 STATUS_WIDTH = 10  # widest token below is "UNVERIFIED" (10 chars)
 
 
+_UNVERIFIED_COUNT = [0]
+
+
 def status_line(status: str, label: str) -> None:
+    """Print one check's result, and COUNT the could-not-verify ones.
+
+    An UNVERIFIED check must not leave the process exiting 0. The text
+    saying "could not verify" while the exit code says "pass" is the
+    absence rule holding in the prose and breaking at the only layer a
+    script reads: `validate && deploy` would treat a check that
+    verified nothing as clean. ADVISORY is different by design — it
+    reports a judgment this tool cannot make, so it never touches the
+    exit code.
+    """
+    if status.strip().upper() == "UNVERIFIED":
+        _UNVERIFIED_COUNT[0] += 1
     print(f"  [{status:>{STATUS_WIDTH}}] {label}")
 
 
@@ -197,22 +214,29 @@ def leading_token(cell: str):
     return m.group(1), m.group(2).strip()
 
 
-def schema_role_value(vocab_list, role_token: str):
-    """A member of an UNORDERED schema vocabulary list that this check's
-    logic must single out by specific meaning (e.g. "the dark status",
-    "the prose-rest disposition") — schema.json lists such members only
-    positionally, with no named key identifying which one plays the
-    role (a genuine gap: see this tool's closing report). `role_token`
-    is that member's current spelling. Returns it only if schema.json
-    still lists it; returns None the moment the schema renames it away,
-    so the caller can degrade LOUDLY (UNVERIFIED) instead of silently
-    matching nothing while still reporting OK — the failure this
-    function exists to convert from silent to loud. Unlike column
-    names (schema_column_index, below), position carries no declared
-    meaning in an unordered vocabulary, so no positional derivation is
-    attempted here.
+def schema_role_value(section: dict, vocab_list, role_key: str):
+    """The member of an UNORDERED schema vocabulary that a check must
+    single out by MEANING — "the status meaning absence", "the
+    disposition a superseded row takes". The caller names the ROLE
+    (`role_key`); schema.json's `roles` map owns the spelling, so a
+    renamed value is followed automatically and no second home for it
+    exists in this file.
+
+    Returns None — so the caller degrades LOUDLY to UNVERIFIED rather
+    than matching nothing while reporting OK — in both failure
+    directions, which are different bugs and both silent otherwise:
+    the schema declares no such role, or it declares one whose value
+    its own vocabulary no longer lists (a stale `roles` entry left
+    behind by a rename that touched only the vocabulary).
+
+    Unlike column names (schema_column_index, below), position carries
+    no declared meaning in an unordered vocabulary, so nothing is
+    derived positionally here.
     """
-    return role_token if role_token in vocab_list else None
+    value = (section.get("roles") or {}).get(role_key)
+    if value is None or value not in vocab_list:
+        return None
+    return value
 
 
 def schema_column_index(header, schema_columns, col_name: str):
@@ -380,7 +404,8 @@ def run_findings(path: Path, schema: dict, grades_override) -> int:
         detail(f"{len(executed_rows)} row(s) carry an executed basis: {executed_rows[:20]}")
 
     # Check 8: cross-cell — superseded rows are prose-rest, no ready-to-land
-    prose_rest = schema_role_value(disposition_vocab, "prose-rest")
+    prose_rest = schema_role_value(
+        schema.get("findings", {}), disposition_vocab, "superseded_disposition")
     if col_index.get("basis") is None or col_index.get("disposition") is None:
         status_line(
             "UNVERIFIED",
@@ -390,10 +415,10 @@ def run_findings(path: Path, schema: dict, grades_override) -> int:
     elif prose_rest is None:
         status_line(
             "UNVERIFIED",
-            "check 8: superseded rows are prose-rest with no ready-to-land mark "
-            "— schema's findings.vocabularies.disposition no longer lists "
-            "'prose-rest' (see this tool's closing report: no named key "
-            "identifies this role in schema.json)",
+            "check 8: superseded rows take the superseded disposition with no "
+            "ready-to-land mark — schema.json declares no usable "
+            "findings.roles.superseded_disposition, or names one its own "
+            "findings.vocabularies.disposition no longer lists",
         )
     else:
         bad = []
@@ -496,7 +521,8 @@ def run_map(path: Path, schema: dict) -> int:
                 "check 4: dark rows carry a label or pointer — 'status' column not found",
             )
         else:
-            dark = schema_role_value(status_vocab, "dark")
+            dark = schema_role_value(
+                schema.get("map", {}), status_vocab, "absence_status")
             bad_vocab = []
             bad_dark = []
             dark_count = 0
@@ -521,10 +547,10 @@ def run_map(path: Path, schema: dict) -> int:
             if dark is None:
                 status_line(
                     "UNVERIFIED",
-                    "check 4: dark rows carry a label or pointer — schema's "
-                    "map.vocabularies.status no longer lists 'dark' (see this "
-                    "tool's closing report: no named key identifies this role "
-                    "in schema.json)",
+                    "check 4: the absence status carries a label or pointer — "
+                    "schema.json declares no usable map.roles.absence_status, "
+                    "or names one its own map.vocabularies.status no longer "
+                    "lists",
                 )
             elif bad_dark:
                 failed = True
@@ -658,11 +684,17 @@ def main() -> int:
         return 2
 
     print()
-    if exit_code == 0:
-        print("GREEN — all non-advisory checks passed")
-    else:
-        print("RED — one or more checks failed")
-    return exit_code
+    unverified = _UNVERIFIED_COUNT[0]
+    if exit_code != 0:
+        print(f"RED — one or more checks failed"
+              + (f"; {unverified} could not be verified" if unverified else ""))
+        return exit_code
+    if unverified:
+        print(f"AMBER — no check failed, but {unverified} could NOT be "
+              f"verified. This is not a pass: exit 3.")
+        return 3
+    print("GREEN — all non-advisory checks passed")
+    return 0
 
 
 if __name__ == "__main__":

@@ -74,6 +74,27 @@ SECTION_ANCHORS = [
 ]
 
 
+# Vocabularies live in templates/schema.json (the single home, read by the
+# shipped checker) while SKILL.md explains what each value MEANS — so each
+# value necessarily appears in both. That is two homes for one fact, which
+# drifts silently: a value added to the schema and not to the prose leaves
+# the walker filling a cell the skill never taught, and the reverse ships a
+# vocabulary the checker rejects. Derived from the schema, never restated:
+# a hardcoded list here would age exactly as badly as the one it guards.
+SCHEMA_REL = "plugin/skills/begehung/templates/schema.json"
+
+
+def vocab_values(schema: dict) -> list:
+    """Every closed-vocabulary value the schema declares, flattened."""
+    out = []
+    for section in ("findings", "map"):
+        vocabs = schema.get(section, {}).get("vocabularies", {})
+        for key, val in vocabs.items():
+            if isinstance(val, list):
+                out.extend((key, v) for v in val)
+    return out
+
+
 def normalize(text: str) -> str:
     return re.sub(r"\s+", " ", text).lower()
 
@@ -114,13 +135,13 @@ def main() -> int:
 
     raw = path.read_text(encoding="utf-8")
     for item, why, heading, phrases in SECTION_ANCHORS:
-        body = normalize(section_body(raw, heading))
-        if not body:
+        sect = normalize(section_body(raw, heading))
+        if not sect:
             print(f"  [MISSING] item {item:<3} {why}")
             print(f"              section {heading!r} not found")
             failures.append(item)
             continue
-        missing = [p for p in phrases if normalize(p) not in body]
+        missing = [p for p in phrases if normalize(p) not in sect]
         status = "MISSING" if missing else "carried"
         print(f"  [{status:>7}] item {item:<3} {why}")
         for p in missing:
@@ -128,7 +149,27 @@ def main() -> int:
         if missing:
             failures.append(item)
 
-    total = len(ANCHORS) + len(SECTION_ANCHORS)
+    schema_path = path.parent / "templates" / "schema.json"
+    if not schema_path.exists():
+        schema_path = Path(SCHEMA_REL)
+    if schema_path.exists():
+        import json
+        schema = json.loads(schema_path.read_text(encoding="utf-8"))
+        pairs = vocab_values(schema)
+        absent = [(k, v) for k, v in pairs if normalize(v) not in body]
+        status = "MISSING" if absent else "carried"
+        print(f"  [{status:>7}] vocab  every schema vocabulary value is "
+              f"explained in SKILL.md ({len(pairs)} values)")
+        for key, val in absent:
+            print(f"              schema {key} value {val!r} appears in "
+                  f"no SKILL.md prose")
+        if absent:
+            failures.append("vocab")
+    else:
+        print(f"  [ADVISORY] vocab  schema not found at {schema_path} — "
+              f"could not verify, not a pass")
+
+    total = len(ANCHORS) + len(SECTION_ANCHORS) + 1
     print()
     if failures:
         print(f"RED — {len(failures)} of {total} items lost their "

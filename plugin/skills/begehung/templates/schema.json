@@ -28,6 +28,10 @@
     "marks": {
       "ready_to_land": "ready-to-land",
       "superseded": "superseded-by"
+    },
+    "roles": {
+      "_comment": "Names WHICH member of an unordered vocabulary a check must single out by meaning. Without this the checker has to spell the value itself, which puts a second home for that value in the code. The checker reads the role; the schema owns the spelling.",
+      "superseded_disposition": "prose-rest"
     }
   },
   "map": {
@@ -50,6 +54,9 @@
     ],
     "vocabularies": {
       "status": ["mechanically-guarded", "prose-covered", "dark"]
+    },
+    "roles": {
+      "absence_status": "dark"
     },
     "required_rows": {
       "cross_cutting": "lifecycle row — where does it live, who writes it, who reads it",
