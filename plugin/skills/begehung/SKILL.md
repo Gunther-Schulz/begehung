@@ -37,11 +37,17 @@ row per axis:
 `status` ∈ **mechanically-guarded** (pointer to the guard's red-proof)
 · **prose-covered** (rule cited) · **dark**. A status claim follows
 the same evidence rule as any finding: guard status is read from the
-guard and its red-proof, never from memory of it.
+guard and its red-proof, never from memory of it. A
+**mechanically-guarded** claim rests on that red-proof read at its own
+file — an executed basis, but only for the class the proof fired on:
+an axis wider than that class carries `modelled` for the surplus. A
+**dark** claim is an absence claim about running behaviour, so its
+status cell reads `dark (modelled)` unless an effect probe was run,
+whose pointer replaces the label.
 
 Beneath it, one row per round:
 
-| round | date | axis | why that axis | read-at | closed-at | reach |
+| round | date | axis | why that axis | read-at | closed-at | reach | class |
 
 `round` counts this MAP's rounds from 1. `read-at` is the version the
 system is read at, `closed-at` the version the close re-read it at —
@@ -49,9 +55,13 @@ per surface where surfaces version independently, otherwise one token
 for the whole system (a commit sha where it is version-controlled,
 else a timestamp or a content hash). `reach` is the close re-test's
 outcome in counts, `r hold, s superseded`, r + s being the findings
-the intervening change touched. An unfilled cell is a step not taken;
-at most one round row is open at a time, so an empty `closed-at` on
-any but the newest is a skipped close.
+the intervening change touched. `class` is the closing cross-row
+read's outcome — the failure class recurring across the MAP's axis
+rows, or `none` — and either way the cell names the rows read across
+and the property compared over them: the row names sit in the table
+above and are copyable, the property is not. An unfilled cell is a
+step not taken; at most one round row is open at a time, so an empty
+`closed-at` on any but the newest is a skipped close.
 
 First run derives rows from the system's STRUCTURE:
 
@@ -66,20 +76,35 @@ First run derives rows from the system's STRUCTURE:
    (own derivative inside the verification path) · staleness ·
    un-rerunnable reads (visual/transcription) · unguarded outward
    gates.
+4. Where the system ENFORCES — guards, gates, checkers, a plugin that
+   governs other work — add one row holding the enforcer to its own
+   invariants. Step 1 reaches the enforcer as a SURFACE, emitting
+   verdicts about others; this row is the other axis, the enforcer
+   held to what it demands of them.
+5. Add one cross-cutting row: the lifecycle questions asked of every
+   artifact the system holds — where does it live, who writes it, who
+   reads it. Its unit is the artifact rather than the surface, so its
+   axis cuts across the others rather than down one.
 
 Completion criterion, checkable and exhaustive: every enumerated
-emission surface appears in at least one row — a surface without a
-row is itself a finding. The motivating incident gets one row like
-any other; a map grown only from incidents is the failure mode this
-skill replaces.
+emission surface appears in at least one row, the cross-cutting row of
+step 5 is present, an enforcer row is present where any step-1 surface
+emits verdicts about other work, and every `dark` row's status cell
+carries `modelled` or an effect-probe pointer. A surface without a row
+is itself a finding; a missing enforcer or cross-cutting row is a
+finding at every invocation, not only the first — the surfaces
+themselves are enumerated at first run. The motivating incident gets
+one row like any other; a map grown only from incidents is the failure
+mode this skill replaces.
 
 ## The findings file
 
 One per round, one row per finding — a data file, default
 `begehung-findings-<date>-r<round>.tsv` beside the MAP, keyed to the
 round's row, or the home the system's own conventions name. Rows are
-appended as findings land, never composed at close: an interrupted
-round still leaves its artifact.
+appended as findings land, never composed at close — an interrupted
+round still leaves its artifact; the cross-row class row is the one
+exception, landing at close by construction.
 
 | lens | grade | artifact line | finding | basis | disposition |
 
@@ -97,11 +122,13 @@ needs (a proposed guard's red-first arrangement, forcing point 3,
 needs a column).
 
 Completion criterion, checkable and exhaustive: every finding the
-round reports appears as a row; every row's `disposition` cell
-carries its exit at round close, an empty cell being the round's own
-open finding; and the finding counts the round reports — total, per
-grade, per lens — are read from the file. Coverage counts stay the
-MAP's.
+round reports appears as a row; every row's `basis` cell carries
+either an executed basis naming its positive control, or its label —
+at the head, or immediately behind a `superseded-by` mark; every row's
+`disposition` cell carries its exit at round close, an empty cell
+being the round's own open finding; and the finding counts the round
+reports — total, per grade, per lens — are read from the file.
+Coverage counts stay the MAP's.
 
 ## The round — five forcing points
 
@@ -112,8 +139,19 @@ MAP's.
    darkest, stalest, or operator-named. An operator question is a
    lens: give it an axis row if none fits, then register it.
 3. **Findings carry bases; proposed guards carry red.** Every claim
-   in the round's output names its executed basis or the label
-   unverified; every guard a finding proposes names its red-first
+   in the round's output names its executed basis or its label, at the
+   head of the finding's `basis` cell — **unverified** where nothing
+   was run or what ran carried no positive control, **modelled** where
+   a claim about something the system RUNS was read off the source
+   instead. Executed means exercised on real input, with a positive
+   control from the same instrument: a case known to carry the
+   property, shown to fire. Where the system under review does not
+   run — a corpus, a process — the INSTRUMENT that produced the
+   reading is what is exercised, and owes its positive control the
+   same way; where a loaded corpus calls a source-read claim merely
+   unverified, this clause asks the finer label. Where the close
+   supersedes such a row, its `superseded-by` mark precedes the label
+   already there. Every guard a finding proposes names its red-first
    arrangement — the real defect case that must fire — before it is
    booked. A loaded operator evidence corpus governs; this clause is
    its minimum, not its replacement.
@@ -141,18 +179,23 @@ MAP's.
    in its `disposition` and `superseded-by <change-ref>:` at the head
    of its `basis`, edited in place. The round row's `closed-at` and
    `reach` record the pass, written whether or not anything moved.
-   Then update the axis row — date and yield from the findings file
-   (yield counts what the lens found; supersession does not reduce
-   it), status from the guard and its red-proof — and report coverage
-   counts — k guarded / m prose / j dark of n rows — in place of any
-   global "done" or "secured" claim. The round's message carries the
-   findings file's path and its counts, never the findings themselves:
-   pasted into a message they land on a person and disposition
-   nowhere. Closing also reads once ACROSS rows: a failure
-   class recurring in several rows is itself a finding — the
-   structure minting that class, where one structural cure outranks
-   n per-row patches. A row unvisited longer than the MAP's declared
-   interval is itself a finding at the next invocation.
+   Make the cross-row read once across the MAP's axis rows before
+   counting anything: a failure class recurring in several rows is
+   itself a finding — the structure minting that class, where one
+   structural cure outranks n per-row patches. The round row's `class`
+   records that read; a named class takes a findings row whose `lens`
+   reads `close` and whose `artifact line` names the axis rows it
+   spans. Then update the axis row — date, and yield from the findings
+   file (yield counts the rows whose `lens` is the registered lens,
+   which supersession does not reduce), status from the guard and its
+   red-proof — and report coverage counts — k guarded / m prose / j
+   dark of n rows — in place of any global "done" or "secured"
+   claim. The round's message carries the findings file's path and its
+   counts, never the findings themselves: pasted into a message they
+   land on a person and disposition nowhere. A row whose `last
+   visited` is older than the interval declared above the axis table —
+   absent one, older than the two rounds before this — is itself a
+   finding at the next invocation.
 
 ## Rotation
 
@@ -160,16 +203,23 @@ Next round takes the darkest row; among equally dark, the stalest.
 An operator-named lens overrides — record it as the round's
 registration, and as a new axis row where none fits.
 
+The cross-cutting lifecycle row (The MAP, step 5) ages by staleness
+like any other, competing inside this rotation rather than beside it —
+so a round with no operator-named lens reaches it by the ordinary
+darkest-or-stalest rule.
+
 ## Composition
 
 - A loaded operator corpus's evidence rules govern all findings; this
-  skill cites them, never restates them.
+  skill cites them, restating only what its own completion criteria
+  and schema requirements read — neither can check a rule its reader
+  may not have loaded.
 - A finding that opens design work routes to statiker (the design
   loop); a delegated sweep uses the dispatch skill's brief forms —
   the brief carries the registered lens and names where the findings
   file lands, or demands its path and the round row — both version
-  tokens and the reach — in the report; the MAP update and the
-  booking stay with the dispatcher.
+  tokens, the reach and the class — in the report; the MAP update
+  and the booking stay with the dispatcher.
 
 ## Maintenance
 

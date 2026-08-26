@@ -196,21 +196,34 @@ SKILL.md, offered under skill-craft's reflexivity rule.
    re-reads the artifact at HEAD and marks any finding whose line
    moved SUPERSEDED with the sha — the dispatch skill's re-read-point
    rule, on the reviewer side.
-3. **Exercise, don't model — as a form, not a virtue.** Round 4's
+3. **Exercise, don't model — as a form, not a virtue.** ANGEWANDT
+   (bundle, v0.3.0) — as a LABEL taxonomy at the head of the finding's
+   `basis` cell, scoped to claims about something the system RUNS,
+   with the instrument standing in where the system does not run. Round 4's
    findings were measured (every verb run against real and probe
    repos, XDG state redirected) and held; round 3's reading of a
    guard mechanism was modelled and wrong (the tokenizer, not the
    classifier). Fix text: a claim about a BUILT artifact rests on an
    executed probe with a positive control from the same instrument;
    a modelled claim is labelled so.
-4. **Two standing lens sources.** (a) The operator's walk-through
+4. **Two standing lens sources.** ANGEWANDT (bundle, v0.3.0) — both as
+   MAP ROWS minted by derivation steps 4 and 5 and required by the
+   completion criterion, not as free-floating lenses: a row is what
+   ages, competes in rotation, and can be checked for. The fourth
+   lifecycle question ("what drains it") was DROPPED — this entry
+   records three, and fire-born admits no fourth without its own
+   incident. (a) The operator's walk-through
    questions of the day — "where does it live, who writes it, who
    reads it" produced the round-4 lens set and its 38; (b) THE
    ENFORCER UNDER ITS OWN INVARIANTS as a rotation axis for any system
    that enforces — round 4's self-chosen darkest corner found the
    plugin repo undeclared, its fire log unregistered, its cache
    unbounded; no artifact-facing lens reaches the self-reference.
-5. **Cross-row read as a mandatory closing step.** Both rounds' single
+5. **Cross-row read as a mandatory closing step.** ANGEWANDT (bundle,
+   v0.3.0) — REDUCED to its recording, since both graded arms did the
+   read unprompted and mandating it would be a no-op: the round row's
+   `class` cell, naming the rows read and the property compared over
+   them, the read ordered before the round's counts. Both rounds' single
    most valuable output (the refusal table; the route-set cure for
    assurance-wider-than-predicate) came from it, and both walkers
    chose to do it. FP5 binds when applied; make its omission visible.
@@ -227,3 +240,11 @@ finding counts per grade); it was NOT intended to drive booking order or
 the cross-row read. Drain seam: if amendments 2–5 give it no second
 consumer, it is a cut candidate at arc end. Consumer of this question:
 the arc's closing pass.
+DRAINED at the closing pass (bundle 3-5, this commit): amendments 2-5
+gave `grade` NO second consumer — the per-grade count in the findings
+file's completion criterion remains its only reader. KEPT anyway, and
+the decision is recorded rather than the seam left open: severity is
+what lets a dispatcher triage a 30-38 finding round, which is the
+incident that opened this arc, and a cut would have to come back the
+first time a round is too large to read whole. Re-book the question if
+a later round shows walkers filling the column with a constant.

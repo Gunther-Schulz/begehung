@@ -44,6 +44,13 @@ fire-born per CLAUDE.md.
   day, label-over-body across ≥4 surfaces, one structural cure)
   satisfies fire-born; no-op status now validated by use — cut
   candidate if fresh-session rounds show the read is default.
+  TRIGGER FIRED, dispositioned 2026-08-26 (bundle 3-5): two fresh opus
+  rounds BOTH performed the cross-row read unprompted, so the READ is
+  default and mandating it would be a no-op. NOT cut — reduced instead:
+  amendment 5 keeps the clause and adds the round row's `class` cell,
+  the recording being what the arms did not do by default. The cut
+  trigger asked whether the rule earns its place; the answer is that
+  its visibility half does and its mandate half did not.
 - **first trial run (probe-then-certify)** — run 2026-08-11 on
   pbs-office (Achse 7 Zahlen-Quercheck), graded 5/5 against the
   Tier-2 signature with one recorded deviation (parallel-ownership

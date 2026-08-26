@@ -91,7 +91,9 @@ as evidence either way.
    darkest/stalest row, not by re-running the same lens.
 6. A findings data file exists for the round, one row per finding
    (lens · grade · artifact line · finding · basis · disposition),
-   its rows appended as findings land rather than composed at close,
+   its rows appended as findings land rather than composed at close
+   (the cross-row class row excepted — it lands at close by
+   construction),
    every disposition cell filled at close; the round's message
    carries its path and counts, not the findings themselves.
    (Extends item 3, which is silent on the artifact. The filled-cell
@@ -112,6 +114,43 @@ as evidence either way.
    half — it is a prose-rest — and is exempt from its BOOKING half.
    An arm that leaves superseded findings unbooked grades CLEAN on
    item 4.)
+8. A claim about something the system RUNS carries an EXECUTED basis
+   with a positive control from the same instrument, or one of two
+   labels at the head of its `basis` cell — unverified (nothing run,
+   or nothing with a positive control) or modelled (read off the
+   source, not the running system); where the system does not run, the
+   instrument that produced the reading is what is exercised. The
+   MODELLED label is the discriminator: the ablation arm's source-read
+   claims arrive unlabelled and read as verified, and a bare
+   `unverified` on a source-read claim does NOT satisfy this item.
+   Carve-out with its own discriminator: a mechanically-guarded status
+   claim rests on its red-proof and takes no label for the class that
+   proof fired on; a DARK status claim is an absence claim about
+   running behaviour and does carry `modelled` absent an effect probe
+   — an arm labelling the first, or exempting the second, misses.
+9a. The MAP of a system that ENFORCES carries a row for the enforcer
+   under its own invariants, minted by a derivation step and required
+   by the completion criterion, present at first run and re-checked at
+   every invocation — that standing re-check covers the enforcer and
+   cross-cutting rows only, never a re-enumeration of surfaces.
+   Discriminator: the row exists in the MAP, not that the enforcer
+   corner was walked (both graded arms reached it unprompted).
+9b. The MAP carries a cross-cutting lifecycle row (where does it live,
+   who writes it, who reads it), minted by the same derivation and
+   required by the same criterion, ageing by staleness so a round with
+   no operator-named lens reaches it by the ordinary
+   darkest-or-stalest rule. Discriminator: the ROW exists in the MAP —
+   an arm treating the lifecycle questions as a free-floating lens
+   outside the row set fails this item.
+10. The round row's `class` cell records the closing cross-row read —
+   the recurring failure class, or `none` — and either way names the
+   axis rows read across AND the property compared over them. The READ
+   itself is not the signature (both graded arms performed it
+   unprompted); the recorded cell is, and an empty one is a skipped
+   close. The row names are copyable from the MAP table, the property
+   is not, so the property is the half a walker cannot fake; the read
+   runs BEFORE the round's counts, since a named class takes a
+   findings row those counts include.
 
 ## Trial method (statiker pattern: probe-then-certify)
 
