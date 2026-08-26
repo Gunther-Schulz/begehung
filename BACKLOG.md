@@ -6,22 +6,6 @@ fire-born per CLAUDE.md.
 
 ## Open
 
-- **READY 2026-08-26 — move the enforcer/cross-cutting row trigger to
-  forcing point 1.** Provenance: the Tier-2 run of 2026-08-26
-  (dev-notes/eval-begehung/2026-08-26/result.md) — amendment 4
-  produced NO row in either arm, because a walker loading an existing
-  MAP never executes the first-run derivation, and the completion
-  criterion's "at every invocation" sentence sits inside that same
-  conditional section. DESIGN: the requirement moves to forcing point
-  1 ("MAP before search"), which fires on every round including one
-  that loads an existing MAP; the completion criterion keeps its
-  wording. WRITE-SET: plugin/skills/begehung/SKILL.md (FP1 and the MAP
-  completion criterion), PLAN.md items 9a/9b. DONE-CRITERION: a round
-  over a system with an EXISTING map produces or demands both rows.
-  VERIFIER: re-run the Tier-2 with-arm against statiker — which has an
-  existing MAP and enforces — and the enforcer row appears or is
-  reported missing as a finding.
-
 - **READY 2026-08-26 — precipitate the machine-read semantics into a
   template + validator.** Provenance: the medium question answered in
   e97943a — ~46% of SKILL.md is machine-read semantics (two table
@@ -47,6 +31,24 @@ fire-born per CLAUDE.md.
   run. Until then begehung stays a standalone thin skill (PLAN.md,
   Mission).
 ## Done
+
+- **move the enforcer/cross-cutting row trigger to forcing point 1** —
+  booked READY and built the same day, 9c10c08 (v0.3.1). Provenance:
+  the Tier-2 run of 2026-08-26
+  (dev-notes/eval-begehung/2026-08-26/result.md) — amendment 4
+  produced NO row in either arm, because a walker loading an existing
+  MAP never executes first-run derivation and the completion
+  criterion's "at every invocation" sentence sat inside that same
+  conditional section. Built rather than left booked on the
+  judgment-desk ruling: designed fix, named verifier, live session,
+  and a lap carrying the first evidence to reach the artifact.
+  DEVIATION from the booked design, with basis: the entry said the
+  requirement "produces or demands both rows"; the self-review showed
+  detection-only leaves the measured failure unfixed, so forcing point
+  1 MINTS the row and Tier-2 item 9a's discriminator went back to
+  existence. VERIFIER STILL OWED AND UNRUN: a Tier-2 with-arm re-run
+  against statiker — existing MAP, enforces — where the enforcer row
+  must EXIST at the round's end.
 
 - **two-arm Tier-2 on OPUS arms** — run 2026-08-11, 2 × opus
   (with/without), statiker repo as the review object. Verdict:

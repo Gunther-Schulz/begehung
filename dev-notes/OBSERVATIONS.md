@@ -157,6 +157,66 @@ wording was false for parallel arms (shared session scratchpad,
 one MAP collision with a stale claim) — existing dispatch-skill
 rule, dispatcher miss, logged not minted.
 
+## 2026-08-26 — 0.3.1: two corrections the eval bought, and two the
+## self-review bought back
+
+Commit 9c10c08. Built rather than booked (judgment-desk ruling): the
+fix was designed, the verifier named, and the lap carried NEW
+evidence — the first that reached the artifact rather than the text,
+which is the condition the repair-lap rule does not bind on. Booking
+it would have cost about what building it cost.
+
+WHAT THE EVAL BOUGHT. (1) The enforcer/cross-cutting row requirement
+moved from the first-run derivation to forcing point 1, the seam that
+fires on every round. (2) Forcing point 3's demand for a positive
+control was cut, measured as a corpus default.
+
+WHAT THE SELF-REVIEW BOUGHT BACK, and both are the same class — a
+correction that solved the half it could see:
+
+· MY FIX ONLY DETECTED. Forcing point 1 reported the missing row and
+  never added it, so a walker would re-find the same absence every
+  round — while the eval's measured failure was that the row was never
+  PRODUCED. Worse, I had widened Tier-2 item 9a in the same change to
+  accept detection as passing. That is the PARENTAGE defect: the
+  expectation moved to fit the mechanism I had just built, and an
+  expectation derived from the artifact it grades stays green on the
+  defect it exists to catch. Forcing point 1 now MINTS; the
+  discriminator is back to existence.
+
+· MY CUT TOOK A SCOPE CLAUSE WITH IT. The sentence carrying the
+  control demand also carried the non-running-system branch. The
+  skill's declared scope is "a system, corpus, or process"; a corpus
+  does not run, so with that branch gone both labels went inert on two
+  of three declared targets — every source-read claim on a rule corpus
+  would take a bare basis and no label, and "blind spots in the rule
+  corpus" is one of this skill's own founding trigger queries.
+  Skill-craft's pruning rule states the cure exactly: before cutting a
+  phrase, state the semantic work it did. I stated one of its two
+  jobs.
+
+CLASS, shared by both: a repair that fixes the symptom its evidence
+made visible while leaving the mechanism's other half unaddressed —
+the detection half without the production half, the control half
+without the scope half.
+
+RULE/FIX TEXT, pre-formulated for the next maintenance pass: when a
+repair follows a MEASUREMENT, the measurement names the symptom, not
+the scope of the fix — enumerate what the changed sentence did BEFORE
+changing it, and what the changed rule must PRODUCE, not merely
+detect. Both halves in the same edit.
+
+RESIDUE WORTH PROTECTING: with the control demand gone, the skill's
+floor now sits below the operator corpus's instrument-pair rule, and
+one sentence carries that precedence ("A loaded operator evidence
+corpus governs; this clause is its minimum, not its replacement"). It
+reads like filler and is now load-bearing. Do not prune it.
+
+CONSUMER + DRAIN SEAM: the next begehung maintenance pass; the
+verifier for correction (1) is a re-run of the Tier-2 with-arm against
+statiker, which has an existing MAP and enforces — the enforcer row
+must EXIST at the end of that round.
+
 ## 2026-08-26 — Tier-2 after the arc: amendment 4 did not fire, and why
 
 Full record: dev-notes/eval-begehung/2026-08-26/ (result.md, both
