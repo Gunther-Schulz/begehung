@@ -1,0 +1,59 @@
+{
+  "_comment": [
+    "The single home for begehung's machine-read vocabularies and column",
+    "orders. SKILL.md explains what each value MEANS; this file is what the",
+    "values ARE, and tools/validate_begehung.py reads it rather than",
+    "restating it. A restated copy beside the parser it mirrors cannot age",
+    "loudly — the source gains a member and the copy stays green.",
+    "Drift between this file and SKILL.md is caught by the repo-owned check",
+    "tools/signature_probe.py (--vocab), not by anyone remembering."
+  ],
+  "findings": {
+    "columns": [
+      "lens",
+      "grade",
+      "artifact line",
+      "finding",
+      "basis",
+      "disposition"
+    ],
+    "columns_are_minimum": true,
+    "vocabularies": {
+      "grade": ["blocking", "notable", "nit"],
+      "grade_overridable": true,
+      "lens_reserved": ["map", "close"],
+      "disposition": ["mechanism", "prose-rest"],
+      "basis_labels": ["unverified", "modelled"]
+    },
+    "marks": {
+      "ready_to_land": "ready-to-land",
+      "superseded": "superseded-by"
+    }
+  },
+  "map": {
+    "axis_columns": [
+      "axis (what against what)",
+      "status",
+      "last visited (date · round)",
+      "yield",
+      "next step"
+    ],
+    "round_columns": [
+      "round",
+      "date",
+      "axis",
+      "why that axis",
+      "read-at",
+      "closed-at",
+      "reach",
+      "class"
+    ],
+    "vocabularies": {
+      "status": ["mechanically-guarded", "prose-covered", "dark"]
+    },
+    "required_rows": {
+      "cross_cutting": "lifecycle row — where does it live, who writes it, who reads it",
+      "enforcer": "the enforcer held to its own invariants (owed only where a surface emits verdicts about other work — a judgment the checker cannot make)"
+    }
+  }
+}
