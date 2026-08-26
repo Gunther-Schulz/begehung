@@ -1,6 +1,6 @@
 {
   "name": "begehung",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "The systematic inspection walk for system reviews: a persistent axis MAP per system, lens pre-registered per round, per-lens yield stop, darkest-corner rotation, findings exiting as emission-point mechanisms or labeled prose-rest — no global done-claim.",
   "author": {
     "name": "Gunther Schulz"

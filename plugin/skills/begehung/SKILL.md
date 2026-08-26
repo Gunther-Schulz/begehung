@@ -91,11 +91,9 @@ emission surface appears in at least one row, the cross-cutting row of
 step 5 is present, an enforcer row is present where any step-1 surface
 emits verdicts about other work, and every `dark` row's status cell
 carries `modelled` or an effect-probe pointer. A surface without a row
-is itself a finding; a missing enforcer or cross-cutting row is a
-finding at every invocation, not only the first — the surfaces
-themselves are enumerated at first run. The motivating incident gets
-one row like any other; a map grown only from incidents is the failure
-mode this skill replaces.
+is itself a finding; so is a missing enforcer or cross-cutting row.
+The motivating incident gets one row like any other; a map grown only
+from incidents is the failure mode this skill replaces.
 
 ## The findings file
 
@@ -111,9 +109,12 @@ exception, landing at close by construction.
 Tab-separated, one line per row, no tab or newline inside a cell —
 prose wanting either is rewritten to one line. `grade` ∈ the system's
 own severity vocabulary where it has one, else **blocking** ·
-**notable** · **nit**. `disposition` ∈ forcing point 4's two exits —
-**mechanism** · **prose-rest**, which covers two cases: a backstop
-named, or a finding the close re-test found no longer holding, whose
+**notable** · **nit**. `lens` is the round's registered lens, or `map`
+for a row the MAP's own hygiene produced — a missing row, a stale
+one — and `close` for the cross-row class row. `disposition` ∈ forcing
+point 4's two exits — **mechanism** · **prose-rest**, which covers two
+cases: a backstop named, or a finding the close re-test found no
+longer holding, whose
 `basis` opens `superseded-by <change-ref>:` — the ref of the landed
 change, the same token space as `closed-at`. A walker without a write
 path marks the row **ready-to-land** beside its proposed exit, never
@@ -123,17 +124,23 @@ needs a column).
 
 Completion criterion, checkable and exhaustive: every finding the
 round reports appears as a row; every row's `basis` cell carries
-either an executed basis naming its positive control, or its label —
-at the head, or immediately behind a `superseded-by` mark; every row's
-`disposition` cell carries its exit at round close, an empty cell
-being the round's own open finding; and the finding counts the round
-reports — total, per grade, per lens — are read from the file.
+either its executed basis or its label — at the head, or immediately
+behind a `superseded-by` mark; every row's `disposition` cell carries
+its exit at round close, an empty cell being the round's own open
+finding; and the finding counts the round reports — total, per grade,
+per lens — are read from the file.
 Coverage counts stay the MAP's.
 
 ## The round — five forcing points
 
 1. **MAP before search.** Load or build the MAP before the first
-   search command of the review.
+   search command of the review. Every round, loaded map or new: a
+   system whose surfaces emit verdicts about other work owes its
+   enforcer row, and every system owes the cross-cutting row (The MAP,
+   steps 4 and 5) — those two rows only, never a re-enumeration of
+   surfaces. Each missing row is MINTED now, its absence recorded as a
+   finding of this round once the round row is registered; a walker
+   without a write path hands the row as ready-to-land.
 2. **Pre-register the lens.** Append the round row (form: The MAP),
    its `read-at` filled, before the first search; `why that axis` names
    darkest, stalest, or operator-named. An operator question is a
@@ -141,17 +148,14 @@ Coverage counts stay the MAP's.
 3. **Findings carry bases; proposed guards carry red.** Every claim
    in the round's output names its executed basis or its label, at the
    head of the finding's `basis` cell — **unverified** where nothing
-   was run or what ran carried no positive control, **modelled** where
-   a claim about something the system RUNS was read off the source
-   instead. Executed means exercised on real input, with a positive
-   control from the same instrument: a case known to carry the
-   property, shown to fire. Where the system under review does not
-   run — a corpus, a process — the INSTRUMENT that produced the
-   reading is what is exercised, and owes its positive control the
-   same way; where a loaded corpus calls a source-read claim merely
-   unverified, this clause asks the finer label. Where the close
+   was run, **modelled** where a claim about something the system RUNS
+   was read off the source instead; where the system under review does
+   not run — a corpus, a process — the instrument that produced the
+   reading stands in for it, and a claim read off the source rather
+   than that instrument's output takes the same label. Where the close
    supersedes such a row, its `superseded-by` mark precedes the label
-   already there. Every guard a finding proposes names its red-first
+   already there.
+   Every guard a finding proposes names its red-first
    arrangement — the real defect case that must fire — before it is
    booked. A loaded operator evidence corpus governs; this clause is
    its minimum, not its replacement.

@@ -117,34 +117,40 @@ as evidence either way.
    half — it is a prose-rest — and is exempt from its BOOKING half.
    An arm that leaves superseded findings unbooked grades CLEAN on
    item 4.)
-8. A claim about something the system RUNS carries an EXECUTED basis
-   with a positive control from the same instrument, or one of two
-   labels at the head of its `basis` cell — unverified (nothing run,
-   or nothing with a positive control) or modelled (read off the
-   source, not the running system); where the system does not run, the
-   instrument that produced the reading is what is exercised. The
-   MODELLED label is the discriminator: the ablation arm's source-read
-   claims arrive unlabelled and read as verified, and a bare
-   `unverified` on a source-read claim does NOT satisfy this item.
+8. A claim about something the system RUNS carries its EXECUTED basis
+   or one of two labels AT THE HEAD of its `basis` cell — unverified
+   (nothing run) or modelled (read off the source, not the running
+   system); where the system does not run, the instrument that
+   produced the reading stands in for it and a claim read off the
+   source rather than that instrument's output takes the same label.
+   The discriminator is the CELL POSITION, not the distinction — the
+   demand for controls measured as a corpus default and was cut
+   (basis: dev-notes/eval-begehung/2026-08-26/result.md). An arm whose
+   observed/derived split lives only in prose misses this item, and so
+   does one that labels nothing on a corpus.
    Carve-out with its own discriminator: a mechanically-guarded status
    claim rests on its red-proof and takes no label for the class that
    proof fired on; a DARK status claim is an absence claim about
    running behaviour and does carry `modelled` absent an effect probe
    — an arm labelling the first, or exempting the second, misses.
-9a. The MAP of a system that ENFORCES carries a row for the enforcer
-   under its own invariants, minted by a derivation step and required
-   by the completion criterion, present at first run and re-checked at
-   every invocation — that standing re-check covers the enforcer and
-   cross-cutting rows only, never a re-enumeration of surfaces.
-   Discriminator: the row exists in the MAP, not that the enforcer
-   corner was walked (both graded arms reached it unprompted).
+9a. The MAP of a system whose surfaces emit verdicts about other work
+   carries a row for the enforcer under its own invariants — minted by
+   derivation step 4 at first run, and by forcing point 1 on every
+   later round, including one that loads an existing map. Forcing
+   point 1 mints those two rows only, never a re-enumeration of
+   surfaces. DISCRIMINATOR: the ROW EXISTS in the MAP at the end of a
+   round over a system with an EXISTING map — reporting its absence
+   without minting it does NOT satisfy this item (basis:
+   dev-notes/eval-begehung/2026-08-26/result.md, where the rows were
+   never produced).
 9b. The MAP carries a cross-cutting lifecycle row (where does it live,
-   who writes it, who reads it), minted by the same derivation and
-   required by the same criterion, ageing by staleness so a round with
-   no operator-named lens reaches it by the ordinary
-   darkest-or-stalest rule. Discriminator: the ROW exists in the MAP —
-   an arm treating the lifecycle questions as a free-floating lens
-   outside the row set fails this item.
+   who writes it, who reads it), minted by derivation step 5 and by
+   forcing point 1 on the same terms, ageing by staleness so a round
+   with no operator-named lens reaches it by the ordinary
+   darkest-or-stalest rule. DISCRIMINATOR: the ROW EXISTS in the MAP,
+   on a loaded-map round as much as a first one — an arm treating the
+   lifecycle questions as a free-floating lens outside the row set
+   fails this item.
 10. The round row's `class` cell records the closing cross-row read —
    the recurring failure class, or `none` — and either way names the
    axis rows read across AND the property compared over them. The READ
