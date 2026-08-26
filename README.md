@@ -11,8 +11,9 @@ lamp where the last fire was; Begehung keeps a persistent **axis MAP**
 per system (which corners are mechanically guarded, which are
 prose-covered, which are dark), pre-registers each round's lens before
 searching, stops a lens on falling yield, and rotates to the darkest
-corner next. There is no global "done" — the deliverable is the map
-and its coverage counts.
+corner next. There is no global "done" — the persistent deliverable is
+the map and its coverage counts; each round's deliverable is a findings
+file whose rows enter the system's own carriers.
 
 Five forcing points, no ceremony: MAP before search · lens
 pre-registered · findings carry bases, proposed guards carry red ·

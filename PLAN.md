@@ -86,6 +86,14 @@ review request):
    carriers.
 5. A follow-up "and is there more?" is answered by rotating to the
    darkest/stalest row, not by re-running the same lens.
+6. A findings data file exists for the round, one row per finding
+   (lens · grade · artifact line · finding · basis · disposition),
+   its rows appended as findings land rather than composed at close,
+   every disposition cell filled at close; the round's message
+   carries its path and counts, not the findings themselves.
+   (Extends item 3, which is silent on the artifact. The filled-cell
+   half is the one that separates this from the recorded incident,
+   where the findings were visible and still booked nowhere.)
 
 ## Trial method (statiker pattern: probe-then-certify)
 
