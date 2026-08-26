@@ -120,3 +120,61 @@ size.
   delivered as six message parts for a person to absorb, with nothing
   booked. That is what a capable reviewer without this skill does by
   default, and it is what amendment 1 exists to end.
+
+
+---
+
+## Verifier for 0.3.1 — RUN AND PASSED (2026-08-26, after 9c10c08)
+
+The failure this record names above ("amendment 4 produced nothing in
+either arm") was repaired in 0.3.1 by moving the requirement to forcing
+point 1 and making it MINT rather than detect. That repair's verifier,
+named when it was booked and run here:
+
+ARRANGEMENT — one opus arm, the 0.3.0 brief UNCHANGED (same task, same
+object, same tier), reading HEAD's SKILL.md by path. The only changed
+variable is the skill text.
+
+PRE-STATE, established before the run: statiker's map carried 13 axis
+rows and ZERO enforcer or cross-cutting rows.
+
+RESULT — both rows MINTED and present at the round's end:
+- "MINTED R4 — the ENFORCER held to its own invariants: does
+  statiker's OWN development follow statiker's five forcing points…"
+  status `dark (modelled)`.
+- "MINTED R4 — CROSS-CUTTING lifecycle: per artifact the system
+  holds… where does it live, who writes it, who reads it" status
+  `dark (modelled)`.
+Each was ALSO recorded as a finding of the round, which is what the
+corrected forcing point prescribes — mint AND record, not one or the
+other. Neither row was walked; both carry "R4 minted the row only",
+leaving them to their own rounds.
+
+CONTROL — the live map is untouched: 13 rows, 0 enforcer, `git status`
+empty, HEAD still 680cdba. The 17 rows are in the review copy only.
+
+OTHER 0.3.1 ELEMENTS, all fired in the same round:
+- `lens` vocabulary used: 7 rows `map`, 1 `close`, 6 the registered
+  lens. Forcing point 1's findings previously had no fillable cell.
+- `modelled` appears 4 times, including on the FAILURE HALF of one
+  finding whose text half was executed — the precision the restored
+  scope clause exists for. Attribution caveat: one run cannot
+  separate "the restored clause did it" from "this round had a
+  modelled claim to make"; the label fired, the attribution is open.
+- The round-row table was added with R1-R3's cells marked "(not
+  recorded)" — graded provenance-fair by the arm, since that map
+  predates the round-row form.
+- `class` names the property compared over the rows, not just the
+  rows: "what reads the artifact that makes this row's status claim
+  true — a program, or a person at a momentary seam."
+- Schema: 15 rows × 7 columns, 0 empty `basis`, 0 empty `disposition`.
+
+THE CUT ALSO HELD. 0.3.1 removed the demand for a positive control as
+a measured corpus default. This arm ran two differently-keyed absence
+sweeps and showed BOTH instruments live on known positives before
+claiming any absence — with the demand gone from the skill. The cut's
+basis is confirmed by the behaviour surviving it.
+
+NOT CERTIFIED BY THIS RUN, named rather than left implied: the arm did
+not run statiker's own test suite, so this round does not certify that
+suite green and the map's record-tool row still carries R3's basis.

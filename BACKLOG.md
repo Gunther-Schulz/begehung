@@ -46,9 +46,16 @@ fire-born per CLAUDE.md.
   requirement "produces or demands both rows"; the self-review showed
   detection-only leaves the measured failure unfixed, so forcing point
   1 MINTS the row and Tier-2 item 9a's discriminator went back to
-  existence. VERIFIER STILL OWED AND UNRUN: a Tier-2 with-arm re-run
-  against statiker — existing MAP, enforces — where the enforcer row
-  must EXIST at the round's end.
+  existence. VERIFIER RUN AND PASSED, 2026-08-26 (record:
+  dev-notes/eval-begehung/2026-08-26/verify-031-*): one opus arm, the
+  0.3.0 brief unchanged, statiker's existing 13-row map. Pre-state
+  established before the run — 13 axis rows, ZERO enforcer or
+  cross-cutting rows. After: both rows MINTED and present, each also
+  recorded as a finding of the round, both carrying `dark (modelled)`.
+  Control holds: the live map is untouched at 13 rows, 0 enforcer
+  (`git status` empty, HEAD 680cdba). Same brief and object as the
+  0.3.0 arm that produced neither row, so the skill text is the only
+  changed variable.
 
 - **two-arm Tier-2 on OPUS arms** — run 2026-08-11, 2 × opus
   (with/without), statiker repo as the review object. Verdict:
