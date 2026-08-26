@@ -156,3 +156,53 @@ grade unaffected; the dispatcher's "your OWN scratchpad" brief
 wording was false for parallel arms (shared session scratchpad,
 one MAP collision with a stale claim) — existing dispatch-skill
 rule, dispatcher miss, logged not minted.
+
+## 2026-08-26 — two production rounds (3 and 4) on one design: five improvements, proposed not patched
+
+Record: cache-fix `BEGEHUNG-MAP.md` rows 50 (round 3, 30 findings)
+and its round-4 replacement (38 findings); walkers
+`opus-begehung-carrier-design` and `opus-begehung-round4`, both
+fresh-context opus, artifact + question only, read-only. Judgment
+desk: claude-code-cache-fix-9e. Consumer of this entry: the next
+begehung maintenance pass; each item is a candidate amendment to
+SKILL.md, offered under skill-craft's reflexivity rule.
+
+1. **Findings need a disposition path — the walk is a producer.**
+   Both rounds delivered 30–38 findings as SendMessage parts (8 parts,
+   ~1 h) absorbed by hand at the desk; the round-4 walker's own MAP row
+   reads "none yet dispositioned in a carrier". Class: a producer
+   whose output lands on a human (the design's own R3). Fix text:
+   the walk emits a findings DATA file (one row: lens · grade ·
+   artifact line · finding · basis) as its coverage artifact — data
+   files pass the harness's report-file block — and the MAP row is
+   generated from it; the dispatcher books each row through the
+   carrier's intake. Message = pointer + counts.
+2. **Freshness token at report time.** Round 3 read at `52918a9` and
+   round 4 at `55fe90b`; the artifact moved under both (lanes.json
+   negation, the plugin declaration), and two blocking findings
+   arrived already fixed. Fix text: before the final part the walker
+   re-reads the artifact at HEAD and marks any finding whose line
+   moved SUPERSEDED with the sha — the dispatch skill's re-read-point
+   rule, on the reviewer side.
+3. **Exercise, don't model — as a form, not a virtue.** Round 4's
+   findings were measured (every verb run against real and probe
+   repos, XDG state redirected) and held; round 3's reading of a
+   guard mechanism was modelled and wrong (the tokenizer, not the
+   classifier). Fix text: a claim about a BUILT artifact rests on an
+   executed probe with a positive control from the same instrument;
+   a modelled claim is labelled so.
+4. **Two standing lens sources.** (a) The operator's walk-through
+   questions of the day — "where does it live, who writes it, who
+   reads it" produced the round-4 lens set and its 38; (b) THE
+   ENFORCER UNDER ITS OWN INVARIANTS as a rotation axis for any system
+   that enforces — round 4's self-chosen darkest corner found the
+   plugin repo undeclared, its fire log unregistered, its cache
+   unbounded; no artifact-facing lens reaches the self-reference.
+5. **Cross-row read as a mandatory closing step.** Both rounds' single
+   most valuable output (the refusal table; the route-set cure for
+   assurance-wider-than-predicate) came from it, and both walkers
+   chose to do it. FP5 binds when applied; make its omission visible.
+
+Placement scan owed at the maintenance pass (grep the governed set
+for "disposition|freshness|exercise|self-reference|cross-row"); not
+run here — this is an observation, not a mint.
