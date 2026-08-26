@@ -7,9 +7,20 @@ item — the DEFINITION — never from SKILL.md, which is the artifact on
 trial. An anchor read off SKILL.md would move with any cut and stay
 green on the loss it exists to catch.
 
-Reach, stated: this probe checks that the TEXT survives a cut. It does
-not measure behaviour — only a Tier-2 arm does that. A green here means
-"no signature item lost its carrier", never "the skill still works".
+Adding an anchor: key it to the DEMAND PLAN.md states, never to the
+sentence SKILL.md currently uses. An anchor whose text could be pasted
+out of SKILL.md is the tell — it goes green on any rewrite keeping the
+phrase and red on every rewrite that does not, which inverts what the
+check is for. Measured here: an anchor quoting `ages by staleness` went
+red on a correct repair (dev-notes/OBSERVATIONS.md, 2026-08-26,
+"an anchor keyed to WORDING").
+
+Reach, stated: this probe checks that the TEXT survives a cut, and that
+a rule SITS in the section governing its moment. It does not measure
+behaviour, and a seam anchor does not show a walker REACHES the rule —
+only a live round on a system with an existing MAP measures that. A
+green here means "no signature item lost its carrier", never "the skill
+still works".
 
 Usage: tools/signature_probe.py [path-to-SKILL.md]
 Exit 0 = every item carried; 1 = at least one item has no carrier.

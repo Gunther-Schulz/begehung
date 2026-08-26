@@ -502,3 +502,49 @@ owns the carrier checker; that repo is a separate write boundary and
 this session does not write it, so it stays a SENDER-SIDE residue,
 named here and reported to the operator rather than assumed
 delivered.
+
+## 2026-08-26 — instrument lesson: an anchor keyed to WORDING grades the rewrite, not the demand
+
+INCIDENT + BASIS. `tools/signature_probe.py` was built to check that
+every PLAN.md Tier-2 signature item still has a carrier in SKILL.md
+after a cut. Its expectations were deliberately derived from PLAN.md
+rather than from SKILL.md — the artifact on trial — which is the
+parentage rule applied correctly at the FILE level. It was then
+violated at the PHRASE level: item 9b's anchor was the literal string
+`ages by staleness`, copied from the wording that happened to be in
+the file. When the self-review's blocking finding was repaired and the
+rule moved to `## Rotation` as "competes here like any other", the
+probe went RED on a CORRECT repair. Executed basis: the red is in this
+session's transcript, and the same run's other eleven items stayed
+green, so the failure was the anchor's, not the repair's.
+
+CLASS. Parentage, one level below the file. Deriving the check from
+the right SOURCE does not protect it if the individual expectation is
+still a quotation of current text: a wording-keyed anchor is green for
+any rewrite that keeps the phrase and red for every rewrite that does
+not — which inverts what the check is for. The failure is quiet in the
+dangerous direction: had the repair happened to retain the phrase
+while moving the rule somewhere useless, the anchor would have passed
+it.
+
+FIX, APPLIED. The anchor now tests the DEMAND PLAN.md states, not the
+sentence SKILL.md uses: item 9b keeps only the row-existence probe,
+and a new SECTION-SCOPED anchor (`9b-seam`) requires that `## Rotation`
+name the cross-cutting row at all — any wording. Proven
+discriminating: GREEN pre-change, RED on the rejected attempt
+reconstructed as a mutant, GREEN post-repair, 12/12.
+
+REACH, stated so the next extender does not over-read the green: the
+seam anchor checks that a rule SITS in the section governing its
+moment. It does not check that a walker REACHES it — only a live
+round on a system with an existing MAP measures that (the
+amendment-4 incident above is the standing proof). The two questions
+are separate, and the anchor answers the cheaper one.
+
+CONSUMER + DRAIN SEAM. Consumer is whoever next extends
+`tools/signature_probe.py` — a different reader from this file's usual
+one, which is why this is its own entry rather than a clause inside
+the amendment-4 record. Seam is the moment a new anchor is added: an
+anchor whose text could be pasted out of SKILL.md is the tell. The
+probe's own docstring carries the short form so the rule sits on that
+reader's actual read path, this file being one they may never open.
