@@ -7,8 +7,9 @@ description: Systematic robustness/coverage review of a system, corpus, or proce
 
 Walk the whole building on a schedule; never keep returning to the
 room where the last fire was. Consumer: a top-tier session model —
-evidence register throughout, and the MAP, the round's findings file
-and the five forcing points below are the only structure.
+evidence register throughout, and the MAP with its two tables, the
+round's findings file and the five forcing points below are the only
+structure.
 
 The mechanic this skill exploits (founding incident 2026-08-11,
 dev-notes/OBSERVATIONS.md in the source repo,
@@ -38,6 +39,20 @@ row per axis:
 the same evidence rule as any finding: guard status is read from the
 guard and its red-proof, never from memory of it.
 
+Beneath it, one row per round:
+
+| round | date | axis | why that axis | read-at | closed-at | reach |
+
+`round` counts this MAP's rounds from 1. `read-at` is the version the
+system is read at, `closed-at` the version the close re-read it at —
+per surface where surfaces version independently, otherwise one token
+for the whole system (a commit sha where it is version-controlled,
+else a timestamp or a content hash). `reach` is the close re-test's
+outcome in counts, `r hold, s superseded`, r + s being the findings
+the intervening change touched. An unfilled cell is a step not taken;
+at most one round row is open at a time, so an empty `closed-at` on
+any but the newest is a skipped close.
+
 First run derives rows from the system's STRUCTURE:
 
 1. Enumerate the claim-emission surfaces — every place the system
@@ -62,9 +77,9 @@ skill replaces.
 
 One per round, one row per finding — a data file, default
 `begehung-findings-<date>-r<round>.tsv` beside the MAP, keyed to the
-round's registration line, or the home the system's own conventions
-name. Rows are appended as findings land, never composed at close: an
-interrupted round still leaves its artifact.
+round's row, or the home the system's own conventions name. Rows are
+appended as findings land, never composed at close: an interrupted
+round still leaves its artifact.
 
 | lens | grade | artifact line | finding | basis | disposition |
 
@@ -72,11 +87,14 @@ Tab-separated, one line per row, no tab or newline inside a cell —
 prose wanting either is rewritten to one line. `grade` ∈ the system's
 own severity vocabulary where it has one, else **blocking** ·
 **notable** · **nit**. `disposition` ∈ forcing point 4's two exits —
-**mechanism** · **prose-rest** (backstop named); a walker without a
-write path marks the row **ready-to-land** beside its proposed exit,
-never in place of it. The schema is a minimum — a round adds
-what its lens needs (a proposed guard's red-first arrangement,
-forcing point 3, needs a column).
+**mechanism** · **prose-rest**, which covers two cases: a backstop
+named, or a finding the close re-test found no longer holding, whose
+`basis` opens `superseded-by <change-ref>:` — the ref of the landed
+change, the same token space as `closed-at`. A walker without a write
+path marks the row **ready-to-land** beside its proposed exit, never
+in place of it. The schema is a minimum — a round adds what its lens
+needs (a proposed guard's red-first arrangement, forcing point 3,
+needs a column).
 
 Completion criterion, checkable and exhaustive: every finding the
 round reports appears as a row; every row's `disposition` cell
@@ -89,10 +107,10 @@ MAP's.
 
 1. **MAP before search.** Load or build the MAP before the first
    search command of the review.
-2. **Pre-register the lens.** Append the round line — date, the row
-   walked, why that row (darkest, stalest, or operator-named) —
-   before the first search. An operator question is a lens: give it a
-   row if none fits, then register it.
+2. **Pre-register the lens.** Append the round row (form: The MAP),
+   its `read-at` filled, before the first search; `why that axis` names
+   darkest, stalest, or operator-named. An operator question is a
+   lens: give it an axis row if none fits, then register it.
 3. **Findings carry bases; proposed guards carry red.** Every claim
    in the round's output names its executed basis or the label
    unverified; every guard a finding proposes names its red-first
@@ -110,16 +128,27 @@ MAP's.
    stops at volume. A walker without a write path hands the findings
    file as the ready-to-land set, its landing trigger naming the
    check: every handed row carries a booking ref or a named refusal.
-   The booking duty transfers to the owner, it does not lapse.
+   A superseded row books nothing — the supersession is its refusal,
+   and it takes no ready-to-land mark. The booking duty transfers to
+   the owner, it does not lapse.
 5. **Rounds end; the walk does not.** Falling yield inside the lens
-   ends the lens, never the review. Close by updating the row — date
-   and yield from the findings file, status from the guard and its
-   red-proof — and reporting coverage counts — k guarded / m prose /
-   j dark of n rows — in place of any
+   ends the lens, never the review. A basis ages while the round
+   walks: close by re-reading the system at its current version and
+   re-testing every finding the intervening change touches — the diff
+   where the system is version-controlled, every finding otherwise —
+   at its cited line or at what it claims; the re-test decides, never
+   the diff alone. One found no longer holding takes **prose-rest**
+   in its `disposition` and `superseded-by <change-ref>:` at the head
+   of its `basis`, edited in place. The round row's `closed-at` and
+   `reach` record the pass, written whether or not anything moved.
+   Then update the axis row — date and yield from the findings file
+   (yield counts what the lens found; supersession does not reduce
+   it), status from the guard and its red-proof — and report coverage
+   counts — k guarded / m prose / j dark of n rows — in place of any
    global "done" or "secured" claim. The round's message carries the
-   findings file's path and its counts, never the findings
-   themselves: pasted into a message they land on a person and
-   disposition nowhere. Closing also reads once ACROSS rows: a failure
+   findings file's path and its counts, never the findings themselves:
+   pasted into a message they land on a person and disposition
+   nowhere. Closing also reads once ACROSS rows: a failure
    class recurring in several rows is itself a finding — the
    structure minting that class, where one structural cure outranks
    n per-row patches. A row unvisited longer than the MAP's declared
@@ -129,7 +158,7 @@ MAP's.
 
 Next round takes the darkest row; among equally dark, the stalest.
 An operator-named lens overrides — record it as the round's
-registration, and as a new row where none fits.
+registration, and as a new axis row where none fits.
 
 ## Composition
 
@@ -138,8 +167,9 @@ registration, and as a new row where none fits.
 - A finding that opens design work routes to statiker (the design
   loop); a delegated sweep uses the dispatch skill's brief forms —
   the brief carries the registered lens and names where the findings
-  file lands, or demands its path in the report; the MAP update and
-  the booking stay with the dispatcher.
+  file lands, or demands its path and the round row — both version
+  tokens and the reach — in the report; the MAP update and the
+  booking stay with the dispatcher.
 
 ## Maintenance
 

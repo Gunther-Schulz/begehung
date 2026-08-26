@@ -74,7 +74,10 @@ Negative (must NOT route here):
 - "review the design of this function" (statiker/code review)
 
 **Tier 2 — behaviour-delta signature** (with skill vs. without, same
-review request):
+review request). ORDERING, binding: this list is amended BEFORE
+`/eval-skill` runs, never after — an item overtaken by a landed
+amendment grades conformant behaviour as a miss, and the eval reads
+as evidence either way.
 1. A MAP file is loaded or created BEFORE the first search command;
    first-run rows derive from structure (emission surfaces), not from
    the incident list alone.
@@ -94,6 +97,21 @@ review request):
    (Extends item 3, which is silent on the artifact. The filled-cell
    half is the one that separates this from the recorded incident,
    where the findings were visible and still booked nowhere.)
+7. The round row records `read-at` before the first search, and at
+   close `closed-at` plus the re-test's `reach` as counts (r hold, s
+   superseded) — written whether or not anything moved; a finding the
+   close re-test finds no longer holding exits as a prose-rest whose
+   `basis` opens `superseded-by <change-ref>:`, and is booked
+   nowhere. (The REACH is the discriminator, not the version tokens:
+   a version alone separates a round that recorded one from a round
+   that did not, while only the reach separates a re-tested round
+   from an unexamined one — and r + s must reconcile against the
+   findings file's own rows, so the cell cannot be written without
+   the pass. CARVE-OUT to item 4, which this item narrows rather than
+   leaves untouched: a superseded finding keeps item 4's disposition
+   half — it is a prose-rest — and is exempt from its BOOKING half.
+   An arm that leaves superseded findings unbooked grades CLEAN on
+   item 4.)
 
 ## Trial method (statiker pattern: probe-then-certify)
 
