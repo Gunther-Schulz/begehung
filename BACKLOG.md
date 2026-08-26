@@ -6,6 +6,32 @@ fire-born per CLAUDE.md.
 
 ## Open
 
+- **READY 2026-08-26 — two clause cuts the arc measured but did not
+  take.** Both are pre-existing text, both carry today's arm evidence
+  as their basis, and both were deferred during the arc because the
+  eval arms were reading SKILL.md as their method at the time — editing
+  it mid-run would have moved the artifact under the measurement.
+  (a) FP5's cross-row RATIONALE ("a failure class recurring in several
+  rows is itself a finding — the structure minting that class, where
+  one structural cure outranks n per-row patches") is a MEASURED
+  no-op: three fresh opus arms (2026-08-26 with-arm, control arm,
+  0.3.1 verifier) each made the cross-row read unprompted. The
+  ORDERING ("before counting anything") and the `class` cell are NOT
+  defaults and stay. (b) The Rotation paragraph on the cross-cutting
+  row may be redundant — a row inside the row set already rotates by
+  construction.
+  DESIGN, decided: cut (a)'s rationale sentence outright, leaving the
+  ordering clause and the `class` cell untouched; cut (b)'s paragraph
+  ONLY together with relocating its staleness clause into derivation
+  step 5 — the 0.3.1 review's constraint, since otherwise PLAN item
+  9b's rotation half becomes a rule on nobody's read path. Neither cut
+  touches the disposition vocabulary, the completion criteria, or the
+  round-row form.
+  WRITE-SET: plugin/skills/begehung/SKILL.md (FP5, Rotation, step 5).
+  DONE-CRITERION: SKILL.md word count DOWN, with the no-op pass
+  recorded per cut clause. VERIFIER: the 0.3.1 review's regression
+  probe set re-run — all thirteen items still present after the cuts.
+
 - **READY 2026-08-26 — precipitate the machine-read semantics into a
   template + validator.** Provenance: the medium question answered in
   e97943a — ~46% of SKILL.md is machine-read semantics (two table
