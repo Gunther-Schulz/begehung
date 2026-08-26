@@ -211,3 +211,12 @@ SKILL.md, offered under skill-craft's reflexivity rule.
 Placement scan owed at the maintenance pass (grep the governed set
 for "disposition|freshness|exercise|self-reference|cross-row"); not
 run here — this is an observation, not a mint.
+
+OPEN QUESTION, booked at amendment 1 (judgment-desk ruling, 2026-08-26):
+**does any reader act on `grade`?** The column entered with item 1's row
+shape and had no consumer inside the skill — nothing graded a finding
+anywhere. It now has the minimum one (the completion criterion reports
+finding counts per grade); it was NOT intended to drive booking order or
+the cross-row read. Drain seam: if amendments 2–5 give it no second
+consumer, it is a cut candidate at arc end. Consumer of this question:
+the arc's closing pass.
