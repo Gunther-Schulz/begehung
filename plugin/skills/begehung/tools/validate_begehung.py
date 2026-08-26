@@ -197,6 +197,38 @@ def leading_token(cell: str):
     return m.group(1), m.group(2).strip()
 
 
+def schema_role_value(vocab_list, role_token: str):
+    """A member of an UNORDERED schema vocabulary list that this check's
+    logic must single out by specific meaning (e.g. "the dark status",
+    "the prose-rest disposition") — schema.json lists such members only
+    positionally, with no named key identifying which one plays the
+    role (a genuine gap: see this tool's closing report). `role_token`
+    is that member's current spelling. Returns it only if schema.json
+    still lists it; returns None the moment the schema renames it away,
+    so the caller can degrade LOUDLY (UNVERIFIED) instead of silently
+    matching nothing while still reporting OK — the failure this
+    function exists to convert from silent to loud. Unlike column
+    names (schema_column_index, below), position carries no declared
+    meaning in an unordered vocabulary, so no positional derivation is
+    attempted here.
+    """
+    return role_token if role_token in vocab_list else None
+
+
+def schema_column_index(header, schema_columns, col_name: str):
+    """Index of `col_name` in `header`, where `col_name` is drawn from
+    `schema_columns` — the schema's own ordered column list, the single
+    home for column layout. Returns None (never a guessed position)
+    when the schema no longer declares that column, or the header
+    (already schema-verified elsewhere, but re-checked here rather than
+    assumed) does not carry it — the caller reports UNVERIFIED rather
+    than crashing on `.index()` or silently defaulting to a position.
+    """
+    if col_name not in schema_columns or col_name not in header:
+        return None
+    return header.index(col_name)
+
+
 # ---------------------------------------------------------------------------
 # findings subcommand
 # ---------------------------------------------------------------------------
@@ -348,11 +380,20 @@ def run_findings(path: Path, schema: dict, grades_override) -> int:
         detail(f"{len(executed_rows)} row(s) carry an executed basis: {executed_rows[:20]}")
 
     # Check 8: cross-cell — superseded rows are prose-rest, no ready-to-land
+    prose_rest = schema_role_value(disposition_vocab, "prose-rest")
     if col_index.get("basis") is None or col_index.get("disposition") is None:
         status_line(
             "UNVERIFIED",
             "check 8: superseded rows are prose-rest with no ready-to-land mark "
             "— basis and/or disposition column not found",
+        )
+    elif prose_rest is None:
+        status_line(
+            "UNVERIFIED",
+            "check 8: superseded rows are prose-rest with no ready-to-land mark "
+            "— schema's findings.vocabularies.disposition no longer lists "
+            "'prose-rest' (see this tool's closing report: no named key "
+            "identifies this role in schema.json)",
         )
     else:
         bad = []
@@ -361,14 +402,14 @@ def run_findings(path: Path, schema: dict, grades_override) -> int:
             if not has_super:
                 continue
             has_mark, remainder = disp_stripped.get(i, (False, ""))
-            if has_mark or remainder != "prose-rest":
+            if has_mark or remainder != prose_rest:
                 bad.append((i, has_mark, remainder))
         if bad:
             failed = True
             status_line(
                 "FAIL",
-                "check 8: a superseded-by row's disposition must be exactly "
-                "'prose-rest' and carry no ready-to-land mark",
+                f"check 8: a superseded-by row's disposition must be exactly "
+                f"{prose_rest!r} and carry no ready-to-land mark",
             )
             for i, has_mark, remainder in bad[:20]:
                 detail(
@@ -442,42 +483,74 @@ def run_map(path: Path, schema: dict) -> int:
         status_line("UNVERIFIED", "check 3: status cell vocabulary — axis table not found")
         status_line("UNVERIFIED", "check 4: dark rows carry a label or pointer — axis table not found")
     else:
-        status_idx = axis_table["header"].index("status")
-        bad_vocab = []
-        bad_dark = []
-        dark_count = 0
-        for i, row in enumerate(axis_table["rows"]):
-            cell = row[status_idx] if status_idx < len(row) else ""
-            token, rest = leading_token(cell)
-            if token not in status_vocab:
-                bad_vocab.append((i, cell))
-                continue
-            if token == "dark":
-                dark_count += 1
-                if not rest:
-                    bad_dark.append((i, cell))
-        if bad_vocab:
+        status_idx = schema_column_index(axis_table["header"], axis_cols, "status")
+        if status_idx is None:
             failed = True
-            status_line("FAIL", f"check 3: every axis-row status cell in {status_vocab}")
-            for i, cell in bad_vocab[:20]:
-                detail(f"axis row {i}: status={cell!r}")
+            status_line(
+                "FAIL",
+                "check 3: every axis-row status cell in schema's status vocabulary "
+                "— 'status' column not found via map.axis_columns",
+            )
+            status_line(
+                "UNVERIFIED",
+                "check 4: dark rows carry a label or pointer — 'status' column not found",
+            )
         else:
-            status_line("OK", f"check 3: all {len(axis_table['rows'])} axis-row status cell(s) valid")
+            dark = schema_role_value(status_vocab, "dark")
+            bad_vocab = []
+            bad_dark = []
+            dark_count = 0
+            for i, row in enumerate(axis_table["rows"]):
+                cell = row[status_idx] if status_idx < len(row) else ""
+                token, rest = leading_token(cell)
+                if token not in status_vocab:
+                    bad_vocab.append((i, cell))
+                    continue
+                if dark is not None and token == dark:
+                    dark_count += 1
+                    if not rest:
+                        bad_dark.append((i, cell))
+            if bad_vocab:
+                failed = True
+                status_line("FAIL", f"check 3: every axis-row status cell in {status_vocab}")
+                for i, cell in bad_vocab[:20]:
+                    detail(f"axis row {i}: status={cell!r}")
+            else:
+                status_line("OK", f"check 3: all {len(axis_table['rows'])} axis-row status cell(s) valid")
 
-        if bad_dark:
-            failed = True
-            status_line("FAIL", "check 4: every 'dark' status cell carries 'modelled' or a pointer")
-            for i, cell in bad_dark[:20]:
-                detail(f"axis row {i}: status={cell!r} — no label/pointer after 'dark'")
-        else:
-            status_line("OK", f"check 4: all {dark_count} dark row(s) carry a label or pointer")
+            if dark is None:
+                status_line(
+                    "UNVERIFIED",
+                    "check 4: dark rows carry a label or pointer — schema's "
+                    "map.vocabularies.status no longer lists 'dark' (see this "
+                    "tool's closing report: no named key identifies this role "
+                    "in schema.json)",
+                )
+            elif bad_dark:
+                failed = True
+                status_line("FAIL", f"check 4: every {dark!r} status cell carries 'modelled' or a pointer")
+                for i, cell in bad_dark[:20]:
+                    detail(f"axis row {i}: status={cell!r} — no label/pointer after {dark!r}")
+            else:
+                status_line("OK", f"check 4: all {dark_count} dark row(s) carry a label or pointer")
+
+    axis_name_col = axis_cols[0] if axis_cols else None
+    axis_idx = (
+        schema_column_index(axis_table["header"], axis_cols, axis_name_col)
+        if axis_table is not None and axis_name_col is not None
+        else None
+    )
 
     # Check 5: cross-cutting row present
     if axis_table is None:
         status_line("UNVERIFIED", "check 5: cross-cutting row present — axis table not found")
+    elif axis_idx is None:
+        status_line(
+            "UNVERIFIED",
+            "check 5: cross-cutting row present — map.axis_columns[0] not found "
+            "in the axis table header",
+        )
     else:
-        axis_idx = axis_table["header"].index("axis (what against what)") \
-            if "axis (what against what)" in axis_table["header"] else 0
         found = any(
             "cross-cutting" in (row[axis_idx] if axis_idx < len(row) else "").lower()
             for row in axis_table["rows"]
@@ -492,9 +565,13 @@ def run_map(path: Path, schema: dict) -> int:
     # Check 6: enforcer row — ADVISORY, never fails exit code
     if axis_table is None:
         status_line("UNVERIFIED", "check 6: enforcer row present — axis table not found (advisory)")
+    elif axis_idx is None:
+        status_line(
+            "UNVERIFIED",
+            "check 6: enforcer row present — map.axis_columns[0] not found "
+            "in the axis table header (advisory)",
+        )
     else:
-        axis_idx = axis_table["header"].index("axis (what against what)") \
-            if "axis (what against what)" in axis_table["header"] else 0
         found = any(
             "enforcer" in (row[axis_idx] if axis_idx < len(row) else "").lower()
             for row in axis_table["rows"]
@@ -510,22 +587,30 @@ def run_map(path: Path, schema: dict) -> int:
     if round_table is None:
         status_line("UNVERIFIED", "check 7: at most one open round row, and it is last — round table not found")
     else:
-        closed_idx = round_table["header"].index("closed-at")
-        empties = [
-            i for i, row in enumerate(round_table["rows"])
-            if not (row[closed_idx].strip() if closed_idx < len(row) else "")
-        ]
-        n_rows = len(round_table["rows"])
-        if len(empties) > 1:
+        closed_idx = schema_column_index(round_table["header"], round_cols, "closed-at")
+        if closed_idx is None:
             failed = True
-            status_line("FAIL", "check 7: at most one round row has an empty closed-at")
-            detail(f"empty closed-at at round-table row indices: {empties}")
-        elif len(empties) == 1 and empties[0] != n_rows - 1:
-            failed = True
-            status_line("FAIL", "check 7: the one open round row must be the LAST round row")
-            detail(f"open row index {empties[0]}, last index is {n_rows - 1}")
+            status_line(
+                "FAIL",
+                "check 7: at most one open round row, and it is last "
+                "— 'closed-at' column not found via map.round_columns",
+            )
         else:
-            status_line("OK", f"check 7: {len(empties)} open round row(s), position valid")
+            empties = [
+                i for i, row in enumerate(round_table["rows"])
+                if not (row[closed_idx].strip() if closed_idx < len(row) else "")
+            ]
+            n_rows = len(round_table["rows"])
+            if len(empties) > 1:
+                failed = True
+                status_line("FAIL", "check 7: at most one round row has an empty closed-at")
+                detail(f"empty closed-at at round-table row indices: {empties}")
+            elif len(empties) == 1 and empties[0] != n_rows - 1:
+                failed = True
+                status_line("FAIL", "check 7: the one open round row must be the LAST round row")
+                detail(f"open row index {empties[0]}, last index is {n_rows - 1}")
+            else:
+                status_line("OK", f"check 7: {len(empties)} open round row(s), position valid")
 
     return 1 if failed else 0
 
