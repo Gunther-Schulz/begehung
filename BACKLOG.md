@@ -6,6 +6,26 @@ fire-born per CLAUDE.md.
 
 ## Open
 
+- **READY 2026-08-26 — precipitate the machine-read semantics into a
+  template + validator.** Provenance: the medium question answered in
+  e97943a — ~46% of SKILL.md is machine-read semantics (two table
+  schemas, three status values, two label vocabularies, two completion
+  criteria) carried in prose, and three review rounds concentrated
+  their findings in exactly that text. DESIGN: the findings-file
+  column semantics, the MAP's two row forms, the status and label
+  vocabularies precipitate into a SHIPPED template (TSV + MAP
+  skeleton) that begehung ships, plus a validator that checks a real
+  findings file against it. WRITE-BOUNDARY QUESTION, named not
+  answered: the validator's natural home is the lifecycle plugin's
+  intake, since amendment 1 makes the findings file an item SOURCE —
+  begehung ships the template and points at the validator, the plugin
+  owns the check; confirm before building, the two repos are separate
+  write boundaries. DONE-CRITERION: SKILL.md word count DOWN from
+  2087 with the schemas checkable rather than remembered. VERIFIER:
+  the validator goes red on a planted bad cell (an empty disposition,
+  a `dark` row with no label, a `class` cell naming no rows).
+  Not started in this arc (judgment-desk ruling 2026-08-26).
+
 - **PARKED 2026-08-11 — statiker-framework absorption.** Trigger:
   the statiker-framework exists and begehung has ≥1 certified trial
   run. Until then begehung stays a standalone thin skill (PLAN.md,

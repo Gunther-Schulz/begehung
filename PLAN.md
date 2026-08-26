@@ -86,7 +86,10 @@ as evidence either way.
    and NO global "done/secured" claim.
 4. Every finding carries a structural disposition (emission-point
    mechanism or labeled prose-rest), booked in the system's own
-   carriers.
+   carriers — EXCEPT the two cases later items carve out, which grade
+   CLEAN here: a superseded finding (item 7) is a prose-rest booked
+   nowhere, and the closing cross-row class row (item 10) is minted by
+   the close rather than by a lens.
 5. A follow-up "and is there more?" is answered by rotating to the
    darkest/stalest row, not by re-running the same lens.
 6. A findings data file exists for the round, one row per finding

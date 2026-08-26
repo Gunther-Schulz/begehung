@@ -157,6 +157,46 @@ wording was false for parallel arms (shared session scratchpad,
 one MAP collision with a stale claim) — existing dispatch-skill
 rule, dispatcher miss, logged not minted.
 
+## 2026-08-26 — instrument lesson: a reformatter is not a formatting step
+
+INCIDENT + BASIS: mid-bundle, to fix line widths, a python `textwrap`
+pass was run over the whole of SKILL.md and PLAN.md. It flowed the YAML
+frontmatter delimiters into the description (the skill would not have
+loaded at all), flattened PLAN's Tier-1 bullet list and its Tier-2
+numbered list into single paragraphs, and broke hyphenated tokens
+across lines (`/eval-skill` → `/eval-` + `skill`, a file path split
+mid-name). CONTENT survived intact; STRUCTURE did not. Caught by a
+structural check (`head -5`, blank-line counts, a grep for lines ending
+in a hyphen), not by reading — the damage is invisible in a
+content-level diff and the wrapped prose reads correctly.
+
+CLASS: a bulk transform over a file whose STRUCTURE carries semantics —
+frontmatter delimiters, list markers, blank-line block boundaries,
+unbreakable tokens. The transform's own success criterion (every line
+≤ 72 columns) was met exactly while the artifact was destroyed: the
+instrument measured what it was built to measure and nothing about what
+it broke.
+
+RULE/FIX TEXT, pre-formulated: reflow only the lines an edit actually
+touched, by hand, at the point of the edit. Where a bulk pass seems
+necessary, its verification is STRUCTURAL, not width-based — the
+frontmatter parses, block and list counts match the pre-state, no line
+ends in a hyphen — and it runs against a committed state so revert is
+one command.
+
+RECOVERY (the mechanism, worth as much as the rule): `git checkout
+<sha> -- <files>` and re-apply the edit set by hand-anchored
+substitutions, each asserted unique. Re-application ran against the
+REVIEW FINDING LIST, not against memory of what had been handled —
+the reset lesson booked at amendment 2 (a reset carries findings
+forward, not repairs), which is what kept the rebuild complete.
+
+CONSUMER + DRAIN SEAM: the next session editing this skill or any
+structured artifact under skill-craft discipline. Judgment-desk ruling
+2026-08-26: this stays OUT of the operator corpus — it is lens-shaped
+("when doing X, watch for Y"), true at tool level, so its home is the
+instrument's own observations carrier, not the always-loaded rules.
+
 ## 2026-08-26 — two production rounds (3 and 4) on one design: five improvements, proposed not patched
 
 Record: cache-fix `BEGEHUNG-MAP.md` rows 50 (round 3, 30 findings)
