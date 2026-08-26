@@ -82,6 +82,40 @@ in Composition; placement scan: grep -i "across|recur|class" →
 sole prior hit line 44, derivation dimensions), abstraction ✓
 (system-neutral wording).
 
+CUT 2026-08-26, and the semantic work the cut phrasing did. Removed
+from FP5: "a failure class recurring in several rows is itself a
+finding — the structure minting that class, where one structural cure
+outranks n per-row patches." Two distinct jobs, dispositioned
+separately rather than as one cut:
+
+- The STRUCTURAL-CURE PREFERENCE (one cure over n per-row patches).
+  This is the mint's own founding lesson, and its firing log reads
+  FIRED, not silent — the first fresh-consumer read echoed it near
+  verbatim (tier2-with.md B8, anchored in row A12, escalated to B9).
+  The cut-candidate condition the mint declared ("no firings by the
+  next consolidation") is therefore NOT met, and the cut does not
+  rest on it. What it rests on is this entry's own recorded n=1
+  AMBIGUITY: both control arms produced sibling structural diagnoses
+  WITHOUT the clause, leaving its exclusive contribution over the
+  opus+corpus default unresolved, with the clause-exclusive residue
+  named as the MAP-row anchoring of the diagnosis — which survives in
+  FP5's "a named class takes a findings row whose `artifact line`
+  names the axis rows it spans". Cutting a preference three fresh
+  opus arms exercised unprompted, while keeping the anchoring they
+  did NOT produce by default, is the reduction the evidence supports.
+  CORRECTION to the BACKLOG entry booked at 355b841, which graded
+  this clause a "MEASURED no-op": that overstates the record. Three
+  arms performing the READ measures the read as default; it does not
+  measure the CLAUSE as inert, and the firing log says otherwise.
+  The verdict survives the correction; its stated basis did not.
+- The FIX-TARGET BINDING ("the structure minting that class") — where
+  a class finding's disposition lands. This was NOT redundant with
+  anything and its loss left FP4's "a mechanism at the emission
+  point" unbound for a row spanning n axis rows. Restored to the
+  single definition home rather than to FP5: the MAP round-table
+  `class` sentence now closes "A named class dispositions at the
+  structure minting it, not per row."
+
 ## 2026-08-11 — trial run 2: three-arm Tier-2 on opus (fresh consumers), graded
 
 Full record: eval-begehung/2026-08-11/result.md + the four transcript
@@ -270,6 +304,32 @@ new evidence is the shape the repair-lap rule warns about, and this
 eval is the first evidence that reached the artifact rather than the
 text.
 
+SECOND FIRING OF THIS CLASS, 2026-08-26, same day, and the mechanism
+it finally bought. Repairing this incident moved a rule OUT of the
+first-run derivation block. One commit later, the session cutting two
+measured clauses moved a DIFFERENT standing rule — the cross-cutting
+row's rotation membership — INTO that same block, as an em-dash tail
+on step 5, and justified it as co-location. Caught by the pre-commit
+self-review, which cited this entry back at its author. So the class
+recurs under the very repair that named it, and in the same file: the
+placement reads as correct locally because the SENTENCE is correct,
+exactly as this entry's CLASS paragraph says. Co-location is
+subordinate to firing at the decision moment — a rotation rule's
+moment is lens choice on round 2+, which is when first-run derivation
+does not run.
+
+MECHANISM, now built, which is what the first firing lacked: this
+class was prose-only and so recurred. `tools/signature_probe.py`
+carries a SECTION-SCOPED anchor — a phrase must appear inside the
+section that governs its moment, not merely somewhere in the file —
+and item `9b-seam` demands that `## Rotation` name the cross-cutting
+row. Red-first proof recorded in the landing commit: the probe is
+GREEN on the pre-change file, RED on the rejected attempt (the exact
+defect above, reconstructed), GREEN after repair. The anchor is keyed
+to the DEMAND rather than to any wording — the first draft of it
+quoted the old phrasing and went red on a correct repair, which is
+the parentage error it now avoids.
+
 ## 2026-08-26 — instrument lesson: a reformatter is not a formatting step
 
 INCIDENT + BASIS: mid-bundle, to fix line widths, a python `textwrap`
@@ -401,3 +461,44 @@ what lets a dispatcher triage a 30-38 finding round, which is the
 incident that opened this arc, and a cut would have to come back the
 first time a round is too large to read whole. Re-book the question if
 a later round shows walkers filling the column with a constant.
+
+## 2026-08-26 — instrument lesson: a booked VERIFIER can name an artifact that does not exist
+
+INCIDENT + BASIS. The READY entry booked at 355b841 ("two clause cuts
+the arc measured but did not take") carried the slot `VERIFIER: the
+0.3.1 review's regression probe set re-run — all thirteen items still
+present after the cuts`. At execution the phrase resolved to nothing:
+a whitespace-normalized sweep over every tracked file returned the
+BACKLOG line itself and no other hit, with a positive control
+(`modelled`, 7 files) proving the instrument live. The "probe set"
+had existed only inside a review dispatch's transcript, and "thirteen
+items" matched no enumeration in the repo — PLAN.md's Tier-2
+signature carries ELEVEN. The entry read decision-complete and its
+verifier was unrunnable.
+
+CLASS. Slot-filled-by-reference-to-a-non-artifact. The entry form
+demands a verifier and accepts any SENTENCE in that slot; a phrase
+naming a transcript artifact satisfies the form and dies with the
+session. This is the corpus's consumer-named-at-write-time failure
+inside a slot: the named reader (the executing session) cannot load
+a transcript. It is invisible at booking precisely because the
+booking session still HOLDS the thing it is naming.
+
+FIX, PRE-FORMULATED. Carrier rule: a `VERIFIER:` slot names a
+RUNNABLE artifact — a committed path, a command, or a named eval
+tier — never a description of one. Where the verifier does not exist
+yet, building it is part of the entry's work and the slot says so
+(`VERIFIER: to build — <what it must go red on>`). Mechanical form,
+for a carrier checker: the slot's text must contain a path that
+resolves in the repo, a `/`-command, or the literal token `to build`.
+
+CONSUMER + DRAIN SEAM. Consumer is the session executing a READY
+entry; seam is the moment the verifier is first run. Discharged HERE
+for begehung by building the artifact the slot should have named —
+`tools/signature_probe.py`, red-first proof recorded in the same
+commit. The GENERAL half — teaching the entry-form checker to refuse
+a non-resolving verifier slot — lands in the lifecycle repo, which
+owns the carrier checker; that repo is a separate write boundary and
+this session does not write it, so it stays a SENDER-SIDE residue,
+named here and reported to the operator rather than assumed
+delivered.

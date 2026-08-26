@@ -59,9 +59,10 @@ the intervening change touched. `class` is the closing cross-row
 read's outcome — the failure class recurring across the MAP's axis
 rows, or `none` — and either way the cell names the rows read across
 and the property compared over them: the row names sit in the table
-above and are copyable, the property is not. An unfilled cell is a
-step not taken; at most one round row is open at a time, so an empty
-`closed-at` on any but the newest is a skipped close.
+above and are copyable, the property is not. A named class
+dispositions at the structure minting it, not per row. An unfilled
+cell is a step not taken; at most one round row is open at a time,
+so an empty `closed-at` on any but the newest is a skipped close.
 
 First run derives rows from the system's STRUCTURE:
 
@@ -184,14 +185,12 @@ Coverage counts stay the MAP's.
    of its `basis`, edited in place. The round row's `closed-at` and
    `reach` record the pass, written whether or not anything moved.
    Make the cross-row read once across the MAP's axis rows before
-   counting anything: a failure class recurring in several rows is
-   itself a finding — the structure minting that class, where one
-   structural cure outranks n per-row patches. The round row's `class`
-   records that read; a named class takes a findings row whose `lens`
-   reads `close` and whose `artifact line` names the axis rows it
-   spans. Then update the axis row — date, and yield from the findings
-   file (yield counts the rows whose `lens` is the registered lens,
-   which supersession does not reduce), status from the guard and its
+   counting anything. The round row's `class` records that read; a
+   named class takes a findings row whose `lens` reads `close` and
+   whose `artifact line` names the axis rows it spans. Then update
+   the axis row — date, and yield from the findings file (yield
+   counts the rows whose `lens` is the registered lens, which
+   supersession does not reduce), status from the guard and its
    red-proof — and report coverage counts — k guarded / m prose / j
    dark of n rows — in place of any global "done" or "secured"
    claim. The round's message carries the findings file's path and its
@@ -204,13 +203,9 @@ Coverage counts stay the MAP's.
 ## Rotation
 
 Next round takes the darkest row; among equally dark, the stalest.
+The cross-cutting row (The MAP, step 5) competes here like any other.
 An operator-named lens overrides — record it as the round's
 registration, and as a new axis row where none fits.
-
-The cross-cutting lifecycle row (The MAP, step 5) ages by staleness
-like any other, competing inside this rotation rather than beside it —
-so a round with no operator-named lens reaches it by the ordinary
-darkest-or-stalest rule.
 
 ## Composition
 

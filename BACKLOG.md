@@ -6,32 +6,6 @@ fire-born per CLAUDE.md.
 
 ## Open
 
-- **READY 2026-08-26 — two clause cuts the arc measured but did not
-  take.** Both are pre-existing text, both carry today's arm evidence
-  as their basis, and both were deferred during the arc because the
-  eval arms were reading SKILL.md as their method at the time — editing
-  it mid-run would have moved the artifact under the measurement.
-  (a) FP5's cross-row RATIONALE ("a failure class recurring in several
-  rows is itself a finding — the structure minting that class, where
-  one structural cure outranks n per-row patches") is a MEASURED
-  no-op: three fresh opus arms (2026-08-26 with-arm, control arm,
-  0.3.1 verifier) each made the cross-row read unprompted. The
-  ORDERING ("before counting anything") and the `class` cell are NOT
-  defaults and stay. (b) The Rotation paragraph on the cross-cutting
-  row may be redundant — a row inside the row set already rotates by
-  construction.
-  DESIGN, decided: cut (a)'s rationale sentence outright, leaving the
-  ordering clause and the `class` cell untouched; cut (b)'s paragraph
-  ONLY together with relocating its staleness clause into derivation
-  step 5 — the 0.3.1 review's constraint, since otherwise PLAN item
-  9b's rotation half becomes a rule on nobody's read path. Neither cut
-  touches the disposition vocabulary, the completion criteria, or the
-  round-row form.
-  WRITE-SET: plugin/skills/begehung/SKILL.md (FP5, Rotation, step 5).
-  DONE-CRITERION: SKILL.md word count DOWN, with the no-op pass
-  recorded per cut clause. VERIFIER: the 0.3.1 review's regression
-  probe set re-run — all thirteen items still present after the cuts.
-
 - **READY 2026-08-26 — precipitate the machine-read semantics into a
   template + validator.** Provenance: the medium question answered in
   e97943a — ~46% of SKILL.md is machine-read semantics (two table
@@ -41,15 +15,41 @@ fire-born per CLAUDE.md.
   column semantics, the MAP's two row forms, the status and label
   vocabularies precipitate into a SHIPPED template (TSV + MAP
   skeleton) that begehung ships, plus a validator that checks a real
-  findings file against it. WRITE-BOUNDARY QUESTION, named not
-  answered: the validator's natural home is the lifecycle plugin's
-  intake, since amendment 1 makes the findings file an item SOURCE —
-  begehung ships the template and points at the validator, the plugin
-  owns the check; confirm before building, the two repos are separate
-  write boundaries. DONE-CRITERION: SKILL.md word count DOWN from
-  2087 with the schemas checkable rather than remembered. VERIFIER:
-  the validator goes red on a planted bad cell (an empty disposition,
-  a `dark` row with no label, a `class` cell naming no rows).
+  findings file against it.
+  WRITE-BOUNDARY QUESTION — ANSWERED 2026-08-26, against the premise
+  booked here. The premise was that the validator's natural home is
+  the lifecycle plugin's intake. REFUTED at the interface: lifecycle's
+  intake is `items add`, one item at a time through named CLI slots
+  (`--requirement`, `--goal`, `--write-set`, `--done-criterion`,
+  `--evidence`), with no file-ingest path — it never reads a findings
+  file and so has nothing to check against begehung's schema (basis:
+  lifecycle/plugin/cli/lifecycle_core/cli.py, the `items add` parser,
+  read 2026-08-26). These are two checks with different questions, not
+  one check in two homes: "is this findings file well-formed?" is
+  begehung's, at round close; "can this become an item?" is
+  lifecycle's, at booking. The validator is begehung's, built in this
+  repo, no cross-repo coordination.
+  DESIGN ADDITION: the validator's invocation anchors at forcing point
+  5's close, where the round's counts are reported — an un-fakeable
+  artifact at a moment that observably produces one, rather than a
+  pointer the walker may not reach.
+  DONE-CRITERION, RESTATED with basis: the original ("word count DOWN
+  from 2087") rests on e97943a's ~46% figure. That figure is right
+  about what the text IS and wrong about what can LEAVE — column lists
+  and vocabularies move, but the semantics of judgment-bearing cells
+  cannot (the `class` cell's "the property is not copyable" is the
+  un-fakeable half a template cannot carry). Realistic movement
+  250-400 words, not 900. Criterion: both completion criteria
+  EXECUTABLE, and every vocabulary with exactly one home — word count
+  down is a side effect, not the target.
+  VERIFIER: the validator goes red on a planted bad cell (an empty
+  disposition, a `dark` row with no label, a `class` cell naming no
+  rows), each red shown beside a green on the same file with only that
+  cell repaired.
+  GATE: process-shape change, so the repo's "Evaluation before text"
+  rule puts a Tier-2 re-run between this and RELEASE (not between it
+  and commit); PLAN's Tier-2 list is amended BEFORE that eval runs,
+  per PLAN's own ordering note.
   Not started in this arc (judgment-desk ruling 2026-08-26).
 
 - **PARKED 2026-08-11 — statiker-framework absorption.** Trigger:
@@ -57,6 +57,35 @@ fire-born per CLAUDE.md.
   run. Until then begehung stays a standalone thin skill (PLAN.md,
   Mission).
 ## Done
+
+- **two clause cuts the arc measured but did not take** — built
+  2026-08-26, this commit. Cut (a), the FP5 cross-row RATIONALE, taken
+  as designed. Cut (b), the Rotation paragraph, taken but NOT to the
+  booked destination.
+  DEVIATION from the booked design, with basis: the entry prescribed
+  relocating the staleness clause into MAP derivation step 5. The
+  pre-commit self-review blocked it — step 5 sits under "First run
+  derives rows from the system's STRUCTURE", and rotation only matters
+  from round 2 on, when first-run derivation does not run. That is the
+  amendment-4 class recurring one commit after its own repair
+  (dev-notes/OBSERVATIONS.md, second-firing note). The rule instead
+  stays at its seam as one sentence in `## Rotation` — still a cut,
+  four lines down to one.
+  TWO FURTHER REPAIRS the review bought: the removed FP5 clause was
+  also binding FP4's "the emission point" for a class row spanning n
+  axis rows, restored to the single definition home (the MAP `class`
+  sentence); and the booked basis "MEASURED no-op" was itself wrong —
+  the clause's firing log reads FIRED, and the cut now rests on the
+  record's n=1 ambiguity instead (both corrections in OBSERVATIONS).
+  VERIFIER: the booked one named a "regression probe set" that existed
+  in no committed file — an unbound slot, booked as its own instrument
+  lesson. Built as `tools/signature_probe.py`, expectations derived
+  from PLAN.md rather than from SKILL.md. Red-first proof: GREEN on
+  pre-change HEAD; RED on each of three mutants, each on its own item
+  only (naive Rotation cut → 9b-seam; `class` demand removed → 10;
+  staleness anchor → 9b); GREEN after repair, 12/12.
+  DONE-CRITERION met: 2132 → 2094 words, lint exit 0 / 0 blocking,
+  frontmatter byte-identical so Tier-1 carries no delta.
 
 - **move the enforcer/cross-cutting row trigger to forcing point 1** —
   booked READY and built the same day, 9c10c08 (v0.3.1). Provenance:
