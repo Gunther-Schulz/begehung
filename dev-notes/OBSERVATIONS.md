@@ -168,6 +168,11 @@ begehung maintenance pass; each item is a candidate amendment to
 SKILL.md, offered under skill-craft's reflexivity rule.
 
 1. **Findings need a disposition path — the walk is a producer.**
+   ANGEWANDT ae7e62a (v0.2.0 batch) — with one deviation: the row
+   shape gained a `disposition` column, because without it a
+   conformant file reproduces this incident's own end state. The
+   harness report-file justification was dropped as out-of-domain for
+   a directly-invoked walker; the rule rests on the booking reason.
    Both rounds delivered 30–38 findings as SendMessage parts (8 parts,
    ~1 h) absorbed by hand at the desk; the round-4 walker's own MAP row
    reads "none yet dispositioned in a carrier". Class: a producer
