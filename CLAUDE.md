@@ -20,3 +20,10 @@
 - **Release**: version bump in `plugin/.claude-plugin/plugin.json`,
   commit + push, marketplace update, operator `/reload-plugins`
   (skill-craft `/release-plugin` covers the checklist).
+
+## Legacy carrier
+
+Legacy `BACKLOG.md` citations resolve at 9442b795aed46a73fa3679a53f70f22ca3af1f24 — the commit before its
+retirement. The migration wrote 13 line-citations into `ITEMS.md` and
+`ITEMS-DONE.md` pointing into that blob; a line number into a pinned sha is
+immutable, one into a live file is not.
